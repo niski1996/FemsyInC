@@ -15,15 +15,26 @@ typedef struct PolyXY
 
 
 
+// Functions for 1D Polynomials (Poly)
 Poly createPoly(int degree, double *coefficients);
 void printPoly(Poly poly);
 Poly addPolys(Poly poly1, Poly poly2);
 Poly multiplyPolys(Poly poly1, Poly poly2);
-Poly integralPolys(Poly poly);
-Poly derivativePolys(Poly poly);
+Poly integralPoly(Poly poly);
+Poly derivativePoly(Poly poly);
 double evaluatePoly(Poly poly, double x);
 void freePoly(Poly *poly);
-int comparePoly (Poly poly1, Poly poly2);
+int comparePolys(Poly poly1, Poly poly2);
 
+// Functions for 2D Polynomials (PolyXY)
+PolyXY createPolyXY(int degree, double *coefficients);
+void printPolyXY(PolyXY poly);
+PolyXY addPolysXY(PolyXY poly1, PolyXY poly2);
+PolyXY multiplyPolysXY(PolyXY poly1, PolyXY poly2);
+PolyXY integralPolyXY(PolyXY poly);
+PolyXY derivativePolyXY(PolyXY poly);
+double evaluatePolyXY(PolyXY poly, double x, double y);
+void freePolyXY(PolyXY *poly);
+int comparePolysXY(PolyXY poly1, PolyXY poly2);
 
 #endif

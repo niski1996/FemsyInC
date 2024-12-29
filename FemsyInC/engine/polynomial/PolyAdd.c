@@ -1,29 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "PolyHepler.h"
 #include "Poly.h"
 
 
-Poly addPolys(Poly p1, Poly p2){
+static double* addCoefficients(double* coefficients1, unsigned int numberOfCoeff1, double* coefficients2, unsigned int numberOfCoeff2){
 
-    if (p1.degree = 0) return p2;
-    if (p2.degree = 0) return p1;
-
-    int degree  = max(p1.degree, p2.degree);
-    double *coeff = calloc(degree + 1, sizeof(double));
+    unsigned int size = max(numberOfCoeff1, numberOfCoeff2);
+    double *coeff = calloc(size, sizeof(double));
     if (coeff == NULL)
     {
         fprintf(stderr, "Developer error: Memory allocation failed");
         exit(EXIT_FAILURE);
     }
     
-    for (int i = 0; i <= degree; i++) {
-        double c1 = (i <= p1.degree) ? p1.coefficients[i] : 0.0;
-        double c2 = (i <= p2.degree) ? p2.coefficients[i] : 0.0;
+    for (int i = 0; i <= size; i++) {
+        double c1 = (i <= numberOfCoeff1) ? coefficients1[i] : 0.0;
+        double c2 = (i <= numberOfCoeff2) ? coefficients2[i] : 0.0;
         coeff[i] = c1 + c2;
     }
+    return coeff;
+    
+}
+
+Poly addPolys(Poly p1, Poly p2){
+
+    if (p1.degree == 0) return p2;
+    if (p2.degree == 0) return p1;
+
+    double* coeff = addCoefficients(p1.coefficients, p1.degree + 1, p2.coefficients, p2.degree + 1);
+    int degree  = max(p1.degree, p2.degree);
 
     Poly result = {degree, coeff};
     return result;
-        
-    
+
+}
+PolyXY addPolys(PolyXY p1, PolyXY p2){
+
+    if (p1.degree == 0) return p2;
+    if (p2.degree == 0) return p1;
+
+    double* coeff = addCoefficients(p1.coefficients, getPascalTriangleElementCount(p1.degree), p2.coefficients, getPascalTriangleElementCount(p2.degree));
+    int degree  = max(p1.degree, p2.degree);
+
+    PolyXY result = {degree, coeff};
+    return result;
+
 }
