@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "Poly.h"
+
+int comparePoly(Poly p1, Poly p2){
+    if (p1.degree != p2.degree)
+    {
+        return 0;
+    }
+    for (int i = 0; i < p1.degree; i++)
+    {
+        if (p1.coefficients[i] != p2.coefficients[i])
+        {
+            return 0;
+        }
+        
+    }
+    return 1;
+    
+    
+}
