@@ -1,0 +1,9 @@
+"filename", "language", "C", "C++", "comment", "blank", "total"
+"/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/Poly.h", "C", 2, 0, 0, 0, 2
+"/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyAddTest.c", "C", 36, 0, 0, 12, 48
+"/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyHelper.c", "C", 31, 0, 0, 8, 39
+"/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyHepler.h", "C++", 0, 5, 0, 0, 5
+"/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyMultiply.c", "C", 20, 0, 0, 8, 28
+"/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolySubtract.c", "C", 11, 0, 0, 2, 13
+"/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/main.c", "C", 0, 0, 0, -1, -1
+"Total", "-", 100, 5, 0, 29, 134
