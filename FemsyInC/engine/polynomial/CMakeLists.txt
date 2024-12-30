@@ -12,4 +12,4 @@ set(SOURCES
 
 project(poly VERSION 1.0 LANGUAGES C)
 add_executable(PolyTest ${SOURCES})
-target_link_libraries(PolyTest m)
+target_link_libraries(PolyTest m) 
