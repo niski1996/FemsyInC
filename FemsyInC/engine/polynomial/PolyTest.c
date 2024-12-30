@@ -28,7 +28,7 @@ void test_addPolys_2D() {
     PolyXY p1 = {2, coeff1};
     PolyXY p2 = {1, coeff2};
 
-    PolyXY result = addPolys(p1, p2);
+    PolyXY result = addPolysXY(p1, p2);
 
     assert(result.degree == 2);
     assert(result.coefficients[0] == 6.0); // 1 + 5

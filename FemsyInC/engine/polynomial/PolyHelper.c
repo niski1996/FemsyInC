@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdlib.h>
 #include "PolyHepler.h"
 #include "Poly.h"
 
@@ -45,3 +46,4 @@ PolyXY SwitchXWithY(PolyXY poly) {
 
     return result;
     }
+    //create function to count sum of two intiger
