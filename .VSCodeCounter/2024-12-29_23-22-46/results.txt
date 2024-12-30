@@ -1,0 +1,37 @@
+Date : 2024-12-29 23:22:46
+Directory : /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC
+Total : 9 files,  148 codes, 5 comments, 35 blanks, all 188 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C        |          7 |        110 |          3 |         27 |        140 |
+| C++      |          2 |         38 |          2 |          8 |         48 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                           | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                              |          9 |        148 |          5 |         35 |        188 |
+| . (Files)                                                                                      |          1 |          0 |          0 |          1 |          1 |
+| engine                                                                                         |          8 |        148 |          5 |         34 |        187 |
+| engine/polynomial                                                                              |          8 |        148 |          5 |         34 |        187 |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                       | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/Poly.h         | C++      |         33 |          2 |          7 |         42 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyAdd.c      | C        |         35 |          0 |         15 |         50 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyCompare.c  | C        |         20 |          3 |          3 |         26 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyCreate.c   | C        |         29 |          0 |          2 |         31 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyHelper.c   | C        |          8 |          0 |          1 |          9 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyHepler.h   | C++      |          5 |          0 |          1 |          6 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyMultiply.c | C        |         18 |          0 |          4 |         22 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolySubtract.c | C        |          0 |          0 |          1 |          1 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/main.c                           | C        |          0 |          0 |          1 |          1 |
+| Total                                                                                          |          |        148 |          5 |         35 |        188 |
++------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
