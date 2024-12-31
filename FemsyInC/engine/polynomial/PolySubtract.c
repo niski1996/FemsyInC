@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Poly.h"
-#include "PolyHepler.h"
+#include "PolyHelper.h"
 
 Poly subtractPolys(Poly poly1, Poly poly2){
     Poly negativePoly = scalePoly(poly2, -1);

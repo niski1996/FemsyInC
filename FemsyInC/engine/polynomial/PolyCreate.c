@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Poly.h"
+#include "PolyHelper.h"
 
 Poly createPoly(int degree, double *coefficients) {
     Poly poly;

@@ -1,13 +1,13 @@
 #include <math.h>
 #include <stdlib.h>
-#include "PolyHepler.h"
+#include "PolyHelper.h"
 #include "Poly.h"
 
-unsigned int getPascalTriangleElementCount(unsigned int levelCount){
-    return ((levelCount+1)*(levelCount+2)/2);
+unsigned int getPascalTriangleElementCount(const unsigned int levelCount){
+    return (levelCount)*(levelCount+1)/2;
 }
-unsigned int getPascalTriangleLevelCount(unsigned int elementCount){
-    return (sqrt(1+elementCount)-3)/2;
+unsigned int getPascalTriangleLevelCount(const unsigned int elementCount){
+    return (unsigned int)(sqrt(1+8*elementCount)-1)/2;
 }
 
 unsigned int getPascalTriangleNLevelStartIndex(unsigned int level) {
@@ -46,4 +46,3 @@ PolyXY SwitchXWithY(PolyXY poly) {
 
     return result;
     }
-    //create function to count sum of two intiger

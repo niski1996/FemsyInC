@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "PolyHepler.h"
+#include "PolyHelper.h"
 #include "Poly.h"
 #include "math.h"
 

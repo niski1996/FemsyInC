@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Poly.h"
-#include "PolyHepler.h"
+#include "PolyHelper.h"
 
 Poly multiplyPolys(Poly poly1, Poly poly2) {
     int result_degree = poly1.degree + poly2.degree;
@@ -42,7 +42,7 @@ Poly scalePoly(Poly poly, int scale){
     return result;
 }
 
-PolyXY scalePoly(PolyXY poly, int scale){
+PolyXY scalePolyXY(PolyXY poly, int scale){
 
     PolyXY result = {poly.degree, scaleCoeff(poly.coefficients, getPascalTriangleElementCount(poly.degree), scale)};
     return result;
