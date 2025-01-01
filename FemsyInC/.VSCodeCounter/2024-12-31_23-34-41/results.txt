@@ -1,0 +1,65 @@
+Date : 2024-12-31 23:34:41
+Directory : /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial
+Total : 26 files,  1905 codes, 186 comments, 445 blanks, all 2536 lines
+
+Languages
++-------------+------------+------------+------------+------------+------------+
+| language    | files      | code       | comment    | blank      | total      |
++-------------+------------+------------+------------+------------+------------+
+| C           |         10 |        914 |        120 |        195 |      1,229 |
+| Log         |          2 |        288 |          0 |         49 |        337 |
+| CMake Cache |          1 |        280 |          0 |         63 |        343 |
+| CMake       |          8 |        212 |          0 |         53 |        265 |
+| Makefile    |          1 |        159 |         60 |         71 |        290 |
+| C++         |          3 |         50 |          6 |         13 |         69 |
+| TypeScript  |          1 |          2 |          0 |          1 |          3 |
++-------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                   | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                      |         26 |      1,905 |        186 |        445 |      2,536 |
+| . (Files)                                                                                                                              |         13 |        369 |         64 |         77 |        510 |
+| build                                                                                                                                  |         13 |      1,536 |        122 |        368 |      2,026 |
+| build (Files)                                                                                                                          |          3 |        485 |         60 |        143 |        688 |
+| build/CMakeFiles                                                                                                                       |         10 |      1,051 |         62 |        225 |      1,338 |
+| build/CMakeFiles (Files)                                                                                                               |          4 |        338 |          0 |         60 |        398 |
+| build/CMakeFiles/3.22.1                                                                                                                |          3 |        675 |         62 |        156 |        893 |
+| build/CMakeFiles/3.22.1 (Files)                                                                                                        |          2 |         65 |          0 |         24 |         89 |
+| build/CMakeFiles/3.22.1/CompilerIdC                                                                                                    |          1 |        610 |         62 |        132 |        804 |
+| build/CMakeFiles/PolyTest.dir                                                                                                          |          3 |         38 |          0 |          9 |         47 |
++----------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
+| filename                                                                                                                               | language    | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/CMakeLists.txt                                         | CMake       |         15 |          0 |          1 |         16 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/Poly.h                                                 | C++         |         35 |          2 |          7 |         44 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyAdd.c                                              | C           |         36 |          0 |         15 |         51 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyCompare.c                                          | C           |         20 |          3 |          3 |         26 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyCreate.c                                           | C           |         30 |          0 |          2 |         32 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyFree.c                                             | C           |         16 |          0 |          3 |         19 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyHelper.c                                           | C           |         40 |          0 |          9 |         49 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyHelper.h                                           | C++         |         11 |          0 |          2 |         13 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyMultiply.c                                         | C           |         38 |          0 |         12 |         50 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyPrint.c                                            | C           |         65 |          0 |         10 |         75 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolySubtract.c                                         | C           |         11 |          0 |          3 |         14 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyTest.c                                             | C           |         48 |         55 |          6 |        109 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/PolyTest.h                                             | C++         |          4 |          4 |          4 |         12 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeCache.txt                                   | CMake Cache |        280 |          0 |         63 |        343 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/3.22.1/CMakeCCompiler.cmake           | CMake       |         55 |          0 |         18 |         73 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/3.22.1/CMakeSystem.cmake              | CMake       |         10 |          0 |          6 |         16 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/3.22.1/CompilerIdC/CMakeCCompilerId.c | C           |        610 |         62 |        132 |        804 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/CMakeDirectoryInformation.cmake       | CMake       |         12 |          0 |          5 |         17 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/CMakeError.log                        | Log         |         75 |          0 |         28 |        103 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/CMakeOutput.log                       | Log         |        213 |          0 |         21 |        234 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/Makefile.cmake                        | CMake       |         38 |          0 |          6 |         44 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/PolyTest.dir/DependInfo.cmake         | CMake       |         18 |          0 |          6 |         24 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/PolyTest.dir/cmake_clean.cmake        | CMake       |         18 |          0 |          2 |         20 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/PolyTest.dir/compiler_depend.ts       | TypeScript  |          2 |          0 |          1 |          3 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/Makefile                                         | Makefile    |        159 |         60 |         71 |        290 |
+| /home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/cmake_install.cmake                              | CMake       |         46 |          0 |          9 |         55 |
+| Total                                                                                                                                  |             |      1,905 |        186 |        445 |      2,536 |
++----------------------------------------------------------------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+

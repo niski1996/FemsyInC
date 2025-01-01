@@ -15,34 +15,46 @@ unsigned int getPascalTriangleNLevelStartIndex(unsigned int level) {
 }
 
 unsigned int getPascalTriangleNLevelEndIndex(unsigned int level) {
-    return ((level + 1) * level) / 2 - 1;
+    return getPascalTriangleNLevelStartIndex(level+1)-1;
 }
 
-Poly AdjustPoly(Poly poly)// Adjust poly degree by removing enpty slots and adjusting degree
+unsigned int getPascalTriangleNLevelElementCount(unsigned int level) {
+    return level;
+}
+
+Poly AdjustPoly(Poly poly) // Adjust poly degree by removing empty slots and adjusting degree
 {
-    for(int i = poly.degree; i>0;i--)//TODO what with empty poly? Fuck it
+ for (unsigned int i = poly.degree; i > 0; i--) // TODO what with empty poly? Fuck it
     {
         if (poly.coefficients[i] == 0)
         {
             poly.degree--;
         }
-        else break; 
-
+        else break;
     }
+    return poly;
 }
 
-PolyXY SwitchXWithY(PolyXY poly) {
-    PolyXY result;
-    result.degree = poly.degree;
-    result.coefficients = (double *)malloc(((poly.degree + 1) * (poly.degree + 2) / 2) * sizeof(double));
-
-    unsigned int index = 0;
-    for (unsigned int i = 0; i <= poly.degree; ++i) {
-        for (unsigned int j = 0; j <= i; ++j) {
-            unsigned int originalIndex = getPascalTriangleNLevelStartIndex(i) + j;
-            result.coefficients[index++] = poly.coefficients[originalIndex];
+PolyXY AdjustPolyXY(PolyXY poly) {
+    for (unsigned int i = getPascalTriangleElementCount(poly.degree); i > 0; i--) {
+        if (poly.coefficients[i] == 0) {
+            poly.degree--;
+        } else {
+            break;
         }
     }
+    return poly;
+}
 
-    return result;
+
+
+PolyXY SwitchXWithY(PolyXY poly) {
+    double buffor = 0;
+    for (unsigned int i = 0; i <= poly.degree; ++i) {
+        for (unsigned int j = ; j <= i; ++j) {
+            unsigned int originalIndex = getPascalTriangleNLevelStartIndex(i) + j;
+            poly.coefficients[index++] = poly.coefficients[originalIndex];
+        }
+    }
+    return poly;
     }
