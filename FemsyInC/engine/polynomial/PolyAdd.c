@@ -15,9 +15,9 @@ static double* addCoefficients(double* coefficients1, unsigned int numberOfCoeff
         exit(EXIT_FAILURE);
     }
     
-    for (int i = 0; i <= size; i++) {
-        double c1 = (i <= numberOfCoeff1) ? coefficients1[i] : 0.0;
-        double c2 = (i <= numberOfCoeff2) ? coefficients2[i] : 0.0;
+    for (int i = 0; i < size; i++) {
+        double c1 = (i < numberOfCoeff1) ? coefficients1[i] : 0.0; // check if one polynomial has more coefficients than the other
+        double c2 = (i < numberOfCoeff2) ? coefficients2[i] : 0.0;
         coeff[i] = c1 + c2;
     }
     return coeff;
@@ -31,8 +31,8 @@ Poly addPolys(Poly p1, Poly p2){
 
     double* coeff = addCoefficients(p1.coefficients, p1.degree + 1, p2.coefficients, p2.degree + 1);
     int degree  = (int)fmax(p1.degree, p2.degree);
-
-    Poly result = {degree, coeff};
+    Poly result = createPoly(degree, coeff);
+    free(coeff);
     return result;
 
 }

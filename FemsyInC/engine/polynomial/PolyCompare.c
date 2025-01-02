@@ -16,11 +16,11 @@ static int comparePolysGeneric(unsigned int degree1, double *coeff1, unsigned in
 }
 
 // Function to compare 1D polynomials (Poly)
-int comparePoly(Poly p1, Poly p2) {
+int comparePolys(Poly p1, Poly p2) {
     return comparePolysGeneric(p1.degree, p1.coefficients, p2.degree, p2.coefficients);
 }
 
 // Function to compare 2D polynomials (PolyXY)
-int comparePolyXY(PolyXY p1, PolyXY p2) {
+int comparePolysXY(PolyXY p1, PolyXY p2) {
     return comparePolysGeneric(p1.degree, p1.coefficients, p2.degree, p2.coefficients);
 }

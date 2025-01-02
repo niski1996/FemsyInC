@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.30)
 project(FemsyInC C)
 
 set(CMAKE_C_STANDARD 23)
-
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
 add_executable(FemsyInC main.c
         Test.c
         Test.h

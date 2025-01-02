@@ -21,29 +21,37 @@ Poly multiplyPolys(Poly poly1, Poly poly2) {
     return result;
 }
 
-static double* scaleCoeff(double* coeff, unsigned int numberOfCoeff1, int scale){
-    double *result_coefficients = calloc(numberOfCoeff1, sizeof(double));
+static double* scaleCoeff(double* coeff, unsigned int numberOfCoeff, int scale) {
+    if (coeff == NULL || numberOfCoeff == 0) {
+        fprintf(stderr, "Invalid input to scaleCoeff\n");
+        return NULL;
+    }
+
+    double *result_coefficients = calloc(numberOfCoeff, sizeof(double));
     if (result_coefficients == NULL) {
-        fprintf(stderr, "Developer error: Memory allocation failed\n");
+        fprintf(stderr, "Memory allocation failed\n");
         exit(EXIT_FAILURE);
     }
 
-    for (int i = 0; i <= numberOfCoeff1; i++) {
-        result_coefficients[i] += coeff[i] * scale;
+    for (unsigned int i = 0; i < numberOfCoeff; i++) {
+        result_coefficients[i] = coeff[i] * scale;
     }
 
     return result_coefficients;
 }
 
 
-Poly scalePoly(Poly poly, int scale){
 
-    Poly result = {poly.degree, scaleCoeff(poly.coefficients, poly.degree+1, scale)};
+Poly scalePoly(Poly poly, int scale) {
+    double* coeff = scaleCoeff(poly.coefficients, poly.degree + 1, scale);
+    Poly result = createPoly(poly.degree, coeff);
+    free(coeff);
     return result;
 }
 
-PolyXY scalePolyXY(PolyXY poly, int scale){
-
-    PolyXY result = {poly.degree, scaleCoeff(poly.coefficients, getPascalTriangleElementCount(poly.degree), scale)};
-    return result;
-}
+// PolyXY scalePolyXY(PolyXY poly, int scale){
+//
+//     double* coeff = scaleCoeff(poly.coefficients, getPascalTriangleElementCount(poly.degree), scale);
+//     PolyXY result = {poly.degree, scaleCoeff(poly.coefficients, coeff, scale)};
+//     return result;
+// }

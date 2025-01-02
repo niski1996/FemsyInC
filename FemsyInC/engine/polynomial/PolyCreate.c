@@ -16,7 +16,6 @@ Poly createPoly(int degree, double *coefficients) {
     }
     return poly;
 }
-
 PolyXY createPolXY(int degree, double *coefficients) {
     PolyXY poly;
     poly.degree = degree;

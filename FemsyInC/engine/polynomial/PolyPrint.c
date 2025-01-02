@@ -6,27 +6,15 @@ void printPoly(Poly poly) {
         printf("0\n");
         return;
     }
-
-    for (int i = 0; i >= poly.degree; i++) {
-        if (poly.coefficients[i] != 0) {
-            if (i != poly.degree && poly.coefficients[i] > 0) {
-                printf(" + ");
-            } else if (poly.coefficients[i] < 0) {
-                printf(" - ");
-            }
-
-            double absCoeff = (poly.coefficients[i] < 0) ? -poly.coefficients[i] : poly.coefficients[i];
-            if (absCoeff != 1 || i == 0) {
-                printf("%.2lf", absCoeff);
-            }
-
-            if (i > 0) {
-                printf("x");
-                if (i > 1) {
-                    printf("^%d", i);
-                }
-            }
+    for (int i = 0; i <= poly.degree; i++) {
+        if (poly.coefficients[i]==0) continue;
+        if (poly.coefficients[i]<0) {
+            printf("-");
         }
+        else {
+            printf("+");
+        }
+        printf("%.2lfx^%d ", poly.coefficients[i],i);
     }
     printf("\n");
 }

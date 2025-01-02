@@ -24,7 +24,7 @@ Poly multiplyPolys(Poly poly1, Poly poly2);
 Poly scalePoly(Poly poly, int scale);
 Poly integratePoly(Poly poly);
 Poly derivatePoly(Poly poly);
-double evaluatePoly(Poly poly, double x);
+double evaluatePoly(Poly* poly, double x);
 void freePoly(Poly *poly);
 int comparePolys(Poly poly1, Poly poly2);
 

@@ -11,6 +11,9 @@ add_library(poly STATIC
         PolyPrint.c
         PolySubtract.c
         PolyTest.c
-        PolyTest.h)
+        PolyTest.h
+        PolyEvaluate.c
+        PolyDerivate.c
+        PolyIntegrate.c)
 
 target_link_libraries(poly m)

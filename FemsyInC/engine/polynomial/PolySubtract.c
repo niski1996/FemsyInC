@@ -6,6 +6,7 @@
 Poly subtractPolys(Poly poly1, Poly poly2){
     Poly negativePoly = scalePoly(poly2, -1);
     Poly output =  addPolys(poly1, negativePoly);
+    freePoly(&negativePoly);
     return AdjustPoly(output);
 }
 
