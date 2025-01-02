@@ -15,12 +15,16 @@ unsigned int getPascalTriangleNLevelStartIndex(unsigned int level) {
 }
 
 unsigned int getPascalTriangleNLevelEndIndex(unsigned int level) {
-    return getPascalTriangleNLevelStartIndex(level+1)-1;
+    return level == 1? 0:getPascalTriangleNLevelStartIndex(level+1)-1;
 }
 
-unsigned int getPascalTriangleNLevelElementCount(unsigned int level) {
-    return level;
+unsigned int getPascalTriangleLevelNumerosity(unsigned int level) {
+    return getPascalTriangleNLevelEndIndex(level)- getPascalTriangleNLevelStartIndex(level)+1;
 }
+
+
+
+
 
 Poly AdjustPoly(Poly poly) // Adjust poly degree by removing empty slots and adjusting degree
 {
@@ -46,14 +50,15 @@ PolyXY AdjustPolyXY(PolyXY poly) {
     return poly;
 }
 
-
-
 PolyXY SwitchXWithY(PolyXY poly) {
-    double buffor = 0;
     for (unsigned int i = 0; i <= poly.degree; ++i) {
-        for (unsigned int j = ; j <= i; ++j) {
-            unsigned int originalIndex = getPascalTriangleNLevelStartIndex(i) + j;
-            poly.coefficients[index++] = poly.coefficients[originalIndex];
+        unsigned int startIndex = getPascalTriangleNLevelStartIndex(i+1);
+        unsigned int endIndex = getPascalTriangleNLevelEndIndex(i+1);
+        for (unsigned int j = 0 ; j < getPascalTriangleLevelNumerosity(i+1)/2; ++j) {
+            double buffer = poly.coefficients[startIndex+j];
+            poly.coefficients[startIndex+j]=poly.coefficients[endIndex-j];
+            poly.coefficients[endIndex-j]=buffer;
+
         }
     }
     return poly;
