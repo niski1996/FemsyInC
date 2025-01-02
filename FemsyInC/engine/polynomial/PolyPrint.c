@@ -26,7 +26,7 @@ void printPolyXY(PolyXY poly) {
     }
 
     unsigned int index = 0;
-    for (int totalDegree = poly.degree; totalDegree >= 0; --totalDegree) {
+    for (int totalDegree = 0; totalDegree <= poly.degree; ++totalDegree) {
         for (int i = totalDegree; i >= 0; --i) {
             int j = totalDegree - i;
 

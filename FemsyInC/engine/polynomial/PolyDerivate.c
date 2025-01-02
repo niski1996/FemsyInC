@@ -7,18 +7,13 @@
 
 Poly derivatePoly(Poly poly) {
     if (poly.degree == 0) {
-        double *new_coefficients = (double *)calloc(1, sizeof(double));
-        if (new_coefficients == NULL) {
-            fprintf(stderr, "Memory allocation failed\n");
+        if (poly.degree == 0) {
+            fprintf(stderr, "Error: Cannot derive a polynomial of degree 0\n");
             exit(EXIT_FAILURE);
         }
-        new_coefficients[0] = 0.0;
-        Poly result = {0, new_coefficients};
-        return result;
     }
-
     int new_degree = poly.degree - 1;
-    double *new_coefficients = (double *)calloc(new_degree + 1, sizeof(double));
+    double *new_coefficients = (double *) calloc(new_degree + 1, sizeof(double));
     if (new_coefficients == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
         exit(EXIT_FAILURE);

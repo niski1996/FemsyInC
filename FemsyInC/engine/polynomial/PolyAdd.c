@@ -41,7 +41,7 @@ PolyXY addPolysXY(PolyXY p1, PolyXY p2){
     if (p1.degree == 0) return p2;
     if (p2.degree == 0) return p1;
 
-    double* coeff = addCoefficients(p1.coefficients, getPascalTriangleElementCount(p1.degree), p2.coefficients, getPascalTriangleElementCount(p2.degree));
+    double* coeff = addCoefficients(p1.coefficients, getPascalTriangleElementCount(p1.degree+1), p2.coefficients, getPascalTriangleElementCount(p2.degree+1));
     int degree  = (int)fmax(p1.degree, p2.degree);
 
     PolyXY result = {degree, coeff};

@@ -16,15 +16,17 @@ Poly createPoly(int degree, double *coefficients) {
     }
     return poly;
 }
-PolyXY createPolXY(int degree, double *coefficients) {
+
+PolyXY createPolyXY(int degree, double *coefficients) {
     PolyXY poly;
     poly.degree = degree;
-    poly.coefficients = (double *)calloc(getPascalTriangleLevelCount(degree), sizeof(double));
+    unsigned int elementCount = getPascalTriangleElementCount(degree + 1);
+    poly.coefficients = (double *)calloc(elementCount, sizeof(double));
     if (poly.coefficients == NULL) {
         fprintf(stderr, "Developer error: Memory allocation failed\n");
         exit(EXIT_FAILURE);
     }
-    for (int i = 0; i <= degree; i++) {
+    for (int i = 0; i < elementCount; i++) {
         poly.coefficients[i] = coefficients[i];
     }
     return poly;

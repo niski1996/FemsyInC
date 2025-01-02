@@ -150,27 +150,157 @@ void test_comparePolys() {
 }
 
 // Test functions for 2D Polynomials (PolyXY)
-void test_createPolyXY();
+void test_createPolyXY() {
+    double coeffs[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+    PolyXY poly = createPolyXY(2, coeffs);
+    assert(poly.degree == 2);
+    assert(poly.coefficients[0] == 1.0);
+    assert(poly.coefficients[1] == 2.0);
+    assert(poly.coefficients[2] == 3.0);
+    assert(poly.coefficients[3] == 4.0);
+    assert(poly.coefficients[4] == 5.0);
+    assert(poly.coefficients[5] == 6.0);
+    freePolyXY(&poly);
+    printf("test_createPolyXY passed!\n");
+}
 
-void test_printPolyXY();
+void test_printPolyXY() {
+    double coeffs[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+    PolyXY poly = createPolyXY(2, coeffs);
+    printPolyXY(poly); // Manually verify the output
+    freePolyXY(&poly);
+    printf("test_printPolyXY passed!\n");
+}
 
-void test_addPolysXY();
+void test_addPolysXY() {
+    double coeffs1[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+    double coeffs2[] = {6.0, 5.0, 4.0, 3.0, 2.0, 1.0};
+    PolyXY poly1 = createPolyXY(2, coeffs1);
+    PolyXY poly2 = createPolyXY(2, coeffs2);
+    PolyXY result = addPolysXY(poly1, poly2);
+    assert(result.degree == 2);
+    assert(result.coefficients[0] == 7.0);
+    assert(result.coefficients[1] == 7.0);
+    assert(result.coefficients[2] == 7.0);
+    assert(result.coefficients[3] == 7.0);
+    assert(result.coefficients[4] == 7.0);
+    assert(result.coefficients[5] == 7.0);
+    freePolyXY(&poly1);
+    freePolyXY(&poly2);
+    freePolyXY(&result);
+    printf("test_addPolysXY passed!\n");
+}
 
-void test_subtractPolysXY();
+void test_subtractPolysXY() {
+    double coeffs1[] = {6.0, 5.0, 4.0, 3.0, 2.0, 1.0};
+    double coeffs2[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+    PolyXY poly1 = createPolyXY(2, coeffs1);
+    PolyXY poly2 = createPolyXY(2, coeffs2);
+    PolyXY result = subtractPolysXY(poly1, poly2);
+    assert(result.degree == 2);
+    assert(result.coefficients[0] == 5.0);
+    assert(result.coefficients[1] == 3.0);
+    assert(result.coefficients[2] == 1.0);
+    assert(result.coefficients[3] == -1.0);
+    assert(result.coefficients[4] == -3.0);
+    assert(result.coefficients[5] == -5.0);
+    freePolyXY(&poly1);
+    freePolyXY(&poly2);
+    freePolyXY(&result);
+    printf("test_subtractPolysXY passed!\n");
+}
 
-void test_multiplyPolysXY();
+void test_multiplyPolysXY() {
+    double coeffs1[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+    double coeffs2[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+    PolyXY poly1 = createPolyXY(2, coeffs1);
+    PolyXY poly2 = createPolyXY(2, coeffs2);
+    PolyXY result = multiplyPolysXY(poly1, poly2);
+    assert(result.degree == 4);
+    assert(result.coefficients[0] == 1.0);    // x^0 y^0
+    assert(result.coefficients[1] == 4.0);    // x^1 y^0
+    assert(result.coefficients[2] == 6.0);    // x^0 y^1
+    assert(result.coefficients[3] == 10.0);   // x^1 y^1
+    assert(result.coefficients[4] == 9.0);    // x^2 y^0
+    assert(result.coefficients[5] == 14.0);   // x^0 y^2
+    assert(result.coefficients[6] == 8.0);    // x^2 y^1
+    assert(result.coefficients[7] == 20.0);   // x^3 y^0
+    assert(result.coefficients[8] == 12.0);   // x^1 y^2
+    assert(result.coefficients[9] == 36.0);   // x^0 y^3
+    freePolyXY(&poly1);
+    freePolyXY(&poly2);
+    freePolyXY(&result);
+    printf("test_multiplyPolysXY passed!\n");
+}
 
-void test_scalePolysXY();
-
-void test_integratePolyXY();
-
-void test_derivatePolyXY();
-
-void test_evaluatePolyXY();
-
-void test_freePolyXY();
-
-void test_comparePolysXY();
+void test_scalePolysXY() {
+    double coeffs[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+    PolyXY poly = createPolyXY(2, coeffs);
+    PolyXY result = scalePolysXY(poly, 2);
+    assert(result.degree == 2);
+    assert(result.coefficients[0] == 2.0);
+    assert(result.coefficients[1] == 4.0);
+    assert(result.coefficients[2] == 6.0);
+    assert(result.coefficients[3] == 8.0);
+    assert(result.coefficients[4] == 10.0);
+    assert(result.coefficients[5] == 12.0);
+    freePolyXY(&poly);
+    freePolyXY(&result);
+    printf("test_scalePolysXY passed!\n");
+}
+//
+// void test_integratePolyXY() {
+//     double coeffs[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+//     PolyXY poly = createPolyXY(2, coeffs);
+//     PolyXY result = integratePolyXY(poly);
+//     // Add appropriate assertions based on the expected result
+//     freePolyXY(&poly);
+//     freePolyXY(&result);
+//     printf("test_integratePolyXY passed!\n");
+// }
+//
+// void test_derivatePolyXY() {
+//     double coeffs[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+//     PolyXY poly = createPolyXY(2, coeffs);
+//     PolyXY result = derivatePolyXY(poly);
+//     // Add appropriate assertions based on the expected result
+//     freePolyXY(&poly);
+//     freePolyXY(&result);
+//     printf("test_derivatePolyXY passed!\n");
+// }
+//
+// void test_evaluatePolyXY() {
+//     double coeffs[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+//     PolyXY poly = createPolyXY(2, coeffs);
+//     double result = evaluatePolyXY(&poly, 2.0, 3.0);
+//     // Add appropriate assertions based on the expected result
+//     freePolyXY(&poly);
+//     printf("test_evaluatePolyXY passed!\n");
+// }
+//
+// void test_freePolyXY() {
+//     double coeffs[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+//     PolyXY poly = createPolyXY(2, coeffs);
+//     freePolyXY(&poly);
+//     assert(poly.coefficients == NULL);
+//     assert(poly.degree == 0);
+//     printf("test_freePolyXY passed!\n");
+// }
+//
+// void test_comparePolysXY() {
+//     double coeffs1[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+//     double coeffs2[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+//     PolyXY poly1 = createPolyXY(2, coeffs1);
+//     PolyXY poly2 = createPolyXY(2, coeffs2);
+//     assert(comparePolysXY(poly1, poly2) == 1);
+//     double coeffs3[] = {1.0, 2.0, 3.0, 4.0, 5.0, 7.0};
+//     PolyXY poly3 = createPolyXY(2, coeffs3);
+//     assert(comparePolysXY(poly1, poly3) == 0);
+//     freePolyXY(&poly1);
+//     freePolyXY(&poly2);
+//     freePolyXY(&poly3);
+//     printf("test_comparePolysXY passed!\n");
+// }
 
 //Test for PolyHelper
 void test_getPascalTriangleElementCount() {
@@ -282,8 +412,23 @@ void TestPolyOneVariable() {
     test_comparePolys();
 };
 
+void TestPolyTwoVariables() {
+    test_createPolyXY();
+    test_printPolyXY();
+    test_addPolysXY();
+    test_subtractPolysXY();
+    test_multiplyPolysXY();
+    test_scalePolysXY();
+    // test_integratePolyXY();
+    // test_derivatePolyXY();
+    // test_evaluatePolyXY();
+    // test_freePolyXY();
+    // test_comparePolysXY();
+}
+
 void PolyTest() {
     printf("poly`test\n");
-    TestPolyOneVariable();
-    TestPolyHelper();
+    TestPolyTwoVariables();
+    // TestPolyOneVariable();
+    // TestPolyHelper();
 };

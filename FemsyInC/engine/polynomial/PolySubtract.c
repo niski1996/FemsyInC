@@ -10,6 +10,9 @@ Poly subtractPolys(Poly poly1, Poly poly2){
     return AdjustPoly(output);
 }
 
-PolyXY subtractPolysXY(PolyXY poly1, PolyXY poly2){
-
+PolyXY subtractPolysXY(PolyXY poly1, PolyXY poly2) {
+    PolyXY negativePoly = scalePolysXY(poly2, -1);
+    PolyXY result = addPolysXY(poly1, negativePoly);
+    freePolyXY(&negativePoly);
+    return AdjustPolyXY(result);
 }

@@ -37,7 +37,7 @@ PolyXY multiplyPolysXY(PolyXY poly1, PolyXY poly2);
 PolyXY scalePolysXY(PolyXY poly1, int scale);
 PolyXY integratePolyXY(PolyXY poly);
 PolyXY derivatePolyXY(PolyXY poly);
-double evaluatePolyXY(PolyXY poly, double x, double y);
+double evaluatePolyXY(PolyXY* poly, double x, double y);
 void freePolyXY(PolyXY *poly);
 int comparePolysXY(PolyXY poly1, PolyXY poly2);
 
