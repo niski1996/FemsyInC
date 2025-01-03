@@ -3,7 +3,9 @@
 //
 #include <stdio.h>
 #include "engine/polynomial/PolyTest.h"
+#include  "helpers/HelperTest.h"
 
 void RunAllTests() {
-    PolyTest();
+    // PolyTest();
+    HelperTest();
 }

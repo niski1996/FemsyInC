@@ -1,21 +1,10 @@
-// #include <stdio.h>
-// #include "Test.h"
-//
-//
-// int main() {
-//     printf("Hello, World!\n");
-//     RunAllTests();
-//     return 0;
-// }
-
 #include <stdio.h>
-#include <gsl/gsl_sf_bessel.h>
+#include "Test.h"
 
-int
-main (void)
-{
-    double x = 5.0;
-    double y = gsl_sf_bessel_J0 (x);
-    printf ("J0(%g) = %.18e\n", x, y);
+
+int main() {
+    printf("Hello, World!\n");
+    RunAllTests();
     return 0;
 }
+
