@@ -8,7 +8,7 @@
 #include "../models/types.h"
 #include <stdlib.h>
 
-inline TriangleElementGeometry* ForMatrixOfElementInsertNodesCoordinates(unsigned int *elements, unsigned int elements_count, Node *nodes, int *nodesCount) {
+inline TriangleElementGeometry* ForMatrixOfElementInsertNodesCoordinates(unsigned int *elements, unsigned int elements_count, Point *nodes, int *nodesCount);
 
 
 #endif //HELPER_H

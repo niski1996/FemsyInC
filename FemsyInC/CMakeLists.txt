@@ -11,6 +11,8 @@ add_executable(FemsyInC main.c
 add_subdirectory(engine)
 add_subdirectory(models)
 add_subdirectory(helpers)
+target_link_libraries(FemsyInC PRIVATE coordinateSystem)
+target_link_libraries(FemsyInC PRIVATE vector)
 target_link_libraries(FemsyInC PRIVATE poly)
 target_link_libraries(FemsyInC PRIVATE model)
 target_link_libraries(FemsyInC PRIVATE helper)

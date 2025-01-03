@@ -4,8 +4,10 @@
 #include <stdio.h>
 #include "engine/polynomial/PolyTest.h"
 #include  "helpers/HelperTest.h"
+#include "engine/vector/vectorTest.h"
 
 void RunAllTests() {
     // PolyTest();
-    HelperTest();
+    vectorTest();
+    // HelperTest();
 }

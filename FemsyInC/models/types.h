@@ -7,9 +7,15 @@
 
 typedef struct {
     double x, y, z;
-} Node;
+} Point;
 
 typedef struct {
-    Node nodes[3];
+    Point nodes[3];
 } TriangleElementGeometry;
+
+typedef struct {
+    Point UnitVectorX;
+    Point UnitVectorY;
+    Point UnitVectorZ;
+} CoordinateSystem;
 #endif //TYPES_H
