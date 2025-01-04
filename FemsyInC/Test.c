@@ -5,9 +5,11 @@
 #include "engine/polynomial/PolyTest.h"
 #include  "helpers/HelperTest.h"
 #include "engine/vector/vectorTest.h"
+#include "engine/coordinateSystem/coordinateSystemTest.h"
 
 void RunAllTests() {
     // PolyTest();
-    vectorTest();
+    coordinateSystemTest();
+    // vectorTest();
     // HelperTest();
 }

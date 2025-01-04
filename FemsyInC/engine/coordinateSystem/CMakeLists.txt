@@ -1,3 +1,5 @@
 add_library(coordinateSystem STATIC
-        CoordinateSystem.c
-        CoordinateSystem.h)
+        coordinateSystem.c
+        coordinateSystem.h
+        coordinateSystemTest.c
+        coordinateSystemTest.h)

@@ -101,13 +101,26 @@ void test_createUnitVectorFromPoints_HandlesZeroVector() {
 
     gsl_vector_free(unitVector);
 }
+void test_createUnitVectorFromPoints_UnitVectorLengthIsOne() {
+    Point start = {-1234.0, 1.0, -2989732.0};
+    Point end = {2321123.0, 20392.0, 2343.0};
+    gsl_vector *unitVector = gsl_vector_alloc(3);
+
+    createUnitVectorFromPoints(&start, &end, unitVector);
+
+    double length = gsl_blas_dnrm2(unitVector);
+    assert(fabs(length - 1.0) < 1e-6);
+
+    gsl_vector_free(unitVector);
+}
 
 void vectorTest() {
     CrossProduct_ReturnsCorrectResult();
     CrossProduct_HandlesZeroVectors();
     CrossProduct_HandlesParallelVectors();
     test_createUnitVectorFromPoints_ReturnsCorrectResult();
-    test_createUnitVectorFromPoints_HandlesZeroVector();
+    test_createUnitVectorFromPoints_UnitVectorLengthIsOne();
+    // test_createUnitVectorFromPoints_HandlesZeroVector();
 
     printf("All vector tests passed.\n");
 

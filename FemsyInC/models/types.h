@@ -5,6 +5,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+#include <gsl/gsl_vector.h>
 typedef struct {
     double x, y, z;
 } Point;
@@ -14,8 +15,8 @@ typedef struct {
 } TriangleElementGeometry;
 
 typedef struct {
-    Point UnitVectorX;
-    Point UnitVectorY;
-    Point UnitVectorZ;
+    gsl_vector *UnitVectorX;
+    gsl_vector *UnitVectorY;
+    gsl_vector *UnitVectorZ;
 } CoordinateSystem;
 #endif //TYPES_H
