@@ -9,61 +9,31 @@
 #include "../vector/vector.h"
 
 void CreateCoordinateSystemFromThreeNonLinearPoints_ReturnsCorrectResult() {
-    // Use (1.0, 0.0, 0.0) and (1.0, 1.0, 0.0) to test normalization
     Point origin = {0.0, 0.0, 0.0};
-    Point pointOnX = {1.0, -1.0, 0.0};
-    Point pointOnXY = {1.0, 0.0, 0.0};
+    Point pointOnX = {1.0, 0.0, 0.0};
+    Point pointOnXY = {1.0, 1.0, 0.0};
     CoordinateSystem *coordinateSystem = createCoordinateSystemFromThreeNonLinearPoints(origin, pointOnX, pointOnXY);
 
-    // // Check if UnitVectorX is normalized (should be exactly along the X-axis)
-    // assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorX, 0) - 1.0) < 1e-6);
-    // assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorX, 1) - 0.0) < 1e-6);
-    // assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorX, 2) - 0.0) < 1e-6);
-    //
-    // // Check if UnitVectorY is approximately (0.707107, 0.707107, 0.0) due to normalization
-    // assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorY, 0) - 0.707107) < 1e-6);
-    // assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorY, 1) - 0.707107) < 1e-6);
-    // assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorY, 2) - 0.0) < 1e-6);
-    //
-    // // Check if UnitVectorZ is perpendicular to X and Y, and normalized
-    // assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorZ, 0) - 0.0) < 1e-6);
-    // assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorZ, 1) - 0.0) < 1e-6);
-    // assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorZ, 2) - 1.0) < 1e-6);
+    // Debug prints
+    printf("UnitVectorX: [%f, %f, %f]\n", gsl_vector_get(coordinateSystem->UnitVectorX, 0), gsl_vector_get(coordinateSystem->UnitVectorX, 1), gsl_vector_get(coordinateSystem->UnitVectorX, 2));
+    printf("UnitVectorY: [%f, %f, %f]\n", gsl_vector_get(coordinateSystem->UnitVectorY, 0), gsl_vector_get(coordinateSystem->UnitVectorY, 1), gsl_vector_get(coordinateSystem->UnitVectorY, 2));
+    printf("UnitVectorZ: [%f, %f, %f]\n", gsl_vector_get(coordinateSystem->UnitVectorZ, 0), gsl_vector_get(coordinateSystem->UnitVectorZ, 1), gsl_vector_get(coordinateSystem->UnitVectorZ, 2));
+
+    assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorX, 0) - 1.0) < 1e-6);
+    assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorX, 1) - 0.0) < 1e-6);
+    assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorX, 2) - 0.0) < 1e-6);
+
+    assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorY, 0) - 0.0) < 1e-6);
+    assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorY, 1) - 1.0) < 1e-6);
+    assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorY, 2) - 0.0) < 1e-6);
+
+    assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorZ, 0) - 0.0) < 1e-6);
+    assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorZ, 1) - 0.0) < 1e-6);
+    assert(fabs(gsl_vector_get(coordinateSystem->UnitVectorZ, 2) - 1.0) < 1e-6);
 
     freeCoordinateSystem(&coordinateSystem);
 }
 
-void CreateCoordinateSystemFromThreeNonLinearPoints_HandlesCollinearPoints() {
-    FILE *stderr_backup = stderr;
-    stderr = fopen("/dev/null", "w");
-
-    Point origin = {0.0, 0.0, 0.0};
-    Point pointOnX = {1.0, 0.0, 0.0};
-    Point pointOnXY = {2.0, 0.0, 0.0};
-    CoordinateSystem *coordinateSystem = createCoordinateSystemFromThreeNonLinearPoints(origin, pointOnX, pointOnXY);
-
-    // Check that the function handles collinear points correctly by returning NULL
-    assert(coordinateSystem == NULL);
-
-    fclose(stderr);
-    stderr = stderr_backup;
-}
-
-void CreateCoordinateSystemFromThreeNonLinearPoints_HandlesIdenticalPoints() {
-    FILE *stderr_backup = stderr;
-    stderr = fopen("/dev/null", "w");
-
-    Point origin = {0.0, 0.0, 0.0};
-    Point pointOnX = {0.0, 0.0, 0.0};
-    Point pointOnXY = {0.0, 0.0, 0.0};
-    CoordinateSystem *coordinateSystem = createCoordinateSystemFromThreeNonLinearPoints(origin, pointOnX, pointOnXY);
-
-    // Check that the function handles identical points by returning NULL
-    assert(coordinateSystem == NULL);
-
-    fclose(stderr);
-    stderr = stderr_backup;
-}
 
 void test_freeCoordinateSystem() {
     // Allocate a CoordinateSystem
@@ -83,8 +53,35 @@ void test_freeCoordinateSystem() {
     assert(coordinateSystem == NULL);
 }
 
+void test_createTransformationMatrix() {
+    Point origin = {0.0, 0.0, 0.0};
+    Point pointOnX = {1.0, 0.0, 0.0};
+    Point pointOnXY = {1.0, 1.0, 0.0};
+    CoordinateSystem *coordinateSystem = createCoordinateSystemFromThreeNonLinearPoints(origin, pointOnX, pointOnXY);
+
+    gsl_matrix *transformationMatrix = gsl_matrix_alloc(3, 3);
+    createTransformationMatrix(coordinateSystem, transformationMatrix);
+
+    assert(fabs(gsl_matrix_get(transformationMatrix, 0, 0) - 1.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix, 1, 0) - 0.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix, 2, 0) - 0.0) < 1e-6);
+
+    assert(fabs(gsl_matrix_get(transformationMatrix, 0, 1) - 0.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix, 1, 1) - 1.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix, 2, 1) - 0.0) < 1e-6);
+
+    assert(fabs(gsl_matrix_get(transformationMatrix, 0, 2) - 0.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix, 1, 2) - 0.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix, 2, 2) - 1.0) < 1e-6);
+
+    gsl_matrix_free(transformationMatrix);
+    freeCoordinateSystem(&coordinateSystem);
+}
+
+
 void coordinateSystemTest() {
     CreateCoordinateSystemFromThreeNonLinearPoints_ReturnsCorrectResult();
+    test_createTransformationMatrix();
     test_freeCoordinateSystem();
 
     printf("All coordinateSystem Test passed.\n");

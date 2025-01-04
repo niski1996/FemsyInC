@@ -68,3 +68,16 @@ void freeCoordinateSystem(CoordinateSystem** coordinateSystem) {
         *coordinateSystem = NULL;
     }
 }
+
+void createTransformationMatrix(CoordinateSystem *newCoordinateSystemInnOldLayout,
+    gsl_matrix *OldToNewTransformationMatrix) {
+
+    // Set the first column of the transformation matrix to UnitVectorX
+    gsl_matrix_set_col(OldToNewTransformationMatrix, 0, newCoordinateSystemInnOldLayout->UnitVectorX);
+
+    // Set the second column of the transformation matrix to UnitVectorY
+    gsl_matrix_set_col(OldToNewTransformationMatrix, 1, newCoordinateSystemInnOldLayout->UnitVectorY);
+
+    // Set the third column of the transformation matrix to UnitVectorZ
+    gsl_matrix_set_col(OldToNewTransformationMatrix, 2, newCoordinateSystemInnOldLayout->UnitVectorZ);
+}
