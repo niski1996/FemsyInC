@@ -114,7 +114,46 @@ void test_createUnitVectorFromPoints_UnitVectorLengthIsOne() {
     gsl_vector_free(unitVector);
 }
 
+void CreateUnitVectorFromPoints_ReturnsCorrectUnitVector() {
+    Point start = {0.0, 0.0, 0.0};
+    Point end = {1.0, 1.0, 1.0};
+    gsl_vector* unitVector = gsl_vector_alloc(3);
+    createUnitVectorFromPoints(&start, &end, unitVector);
+
+    assert(fabs(gsl_vector_get(unitVector, 0) - 1.0 / sqrt(3.0)) < 1e-6);
+    assert(fabs(gsl_vector_get(unitVector, 1) - 1.0 / sqrt(3.0)) < 1e-6);
+    assert(fabs(gsl_vector_get(unitVector, 2) - 1.0 / sqrt(3.0)) < 1e-6);
+
+    gsl_vector_free(unitVector);
+}
+
+void GetUnitVectorOnDirectionOfCrossProduct_ReturnsCorrectUnitVector() {
+    gsl_vector* u = gsl_vector_alloc(3);
+    gsl_vector* v = gsl_vector_alloc(3);
+    gsl_vector* versor = gsl_vector_alloc(3);
+
+    gsl_vector_set(u, 0, 1.0);
+    gsl_vector_set(u, 1, 0.0);
+    gsl_vector_set(u, 2, 0.0);
+
+    gsl_vector_set(v, 0, 0.0);
+    gsl_vector_set(v, 1, 1.0);
+    gsl_vector_set(v, 2, 0.0);
+
+    getUnitVectorOnDirectionOfCrossProduct(u, v, versor);
+
+    assert(fabs(gsl_vector_get(versor, 0) - 0.0) < 1e-6);
+    assert(fabs(gsl_vector_get(versor, 1) - 0.0) < 1e-6);
+    assert(fabs(gsl_vector_get(versor, 2) - 1.0) < 1e-6);
+
+    gsl_vector_free(u);
+    gsl_vector_free(v);
+    gsl_vector_free(versor);
+}
+
 void vectorTest() {
+    GetUnitVectorOnDirectionOfCrossProduct_ReturnsCorrectUnitVector();
+    CreateUnitVectorFromPoints_ReturnsCorrectUnitVector();
     CrossProduct_ReturnsCorrectResult();
     CrossProduct_HandlesZeroVectors();
     CrossProduct_HandlesParallelVectors();

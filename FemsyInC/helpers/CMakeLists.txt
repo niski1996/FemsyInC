@@ -1,4 +1,8 @@
 add_library(helper STATIC InputHelper.c
-        Helper.h
+        helper.h
         HelperTest.h
-        HelperTest.c)
+        HelperTest.c
+        transformationHelper.c
+        a.c)
+
+target_link_libraries(helper PUBLIC model)

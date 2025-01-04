@@ -10,4 +10,5 @@
 
 void cross_product(const gsl_vector *u, const gsl_vector *v, gsl_vector *product);
 void createUnitVectorFromPoints(const Point *start, const Point *end, gsl_vector *outputUnitVector);
+void getUnitVectorOnDirectionOfCrossProduct(const gsl_vector *u, const gsl_vector *v, gsl_vector *versor);
 #endif //VECTOR_H

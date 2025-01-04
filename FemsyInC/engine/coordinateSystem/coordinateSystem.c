@@ -18,44 +18,35 @@ static gsl_vector* normalize_vector(gsl_vector* vector) {
     return vector;
 }
 
-// Create a unit vector from two points
-static gsl_vector* create_unit_vector(const Point* start, const Point* end) {
-    gsl_vector* unitVector = gsl_vector_alloc(3);
-    createUnitVectorFromPoints(start, end, unitVector);
-
-    return unitVector;
-}
-
-// Calculate the normalized cross product of two vectors
-static gsl_vector* calculate_normalized_cross_product(const gsl_vector* u, const gsl_vector* v) {
-    gsl_vector* product = gsl_vector_alloc(3);
-    cross_product(u, v, product);
-
-    return normalize_vector(product);
-}
 
 // Create a coordinate system from three non-linear points
-CoordinateSystem* createCoordinateSystemFromThreeNonLinearPoints(Point origin, Point pointOnX, Point pointOnXY) {
-    CoordinateSystem* coordinateSystem = (CoordinateSystem*)malloc(sizeof(CoordinateSystem));
-    if (coordinateSystem == NULL) {
+CoordinateSystem* createCoordinateSystemFromThreeNonLinearPoints(const Point origin, const Point pointOnX, const Point pointOnXY) {
+    CoordinateSystem* coordinateSystemWritenInOldSystem = malloc(sizeof(CoordinateSystem));
+    if (coordinateSystemWritenInOldSystem == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
         exit(EXIT_FAILURE);
     }
+    gsl_vector* UnitVectorX = gsl_vector_alloc(3);
+    gsl_vector* UnitVectorY = gsl_vector_alloc(3);
+    gsl_vector* UnitVectorZ = gsl_vector_alloc(3);
+    gsl_vector* VectorXY = gsl_vector_alloc(3);
 
     // Create and log the unit vector X
-    gsl_vector* UnitVectorX = create_unit_vector(&origin, &pointOnX);
-    coordinateSystem->UnitVectorX = UnitVectorX;
+    createUnitVectorFromPoints(&origin, &pointOnX, UnitVectorX);
+    coordinateSystemWritenInOldSystem->UnitVectorX = UnitVectorX;
+
+    // Create and log the unit vector Z
+    createUnitVectorFromPoints(&origin, &pointOnXY, VectorXY);
+    coordinateSystemWritenInOldSystem->UnitVectorY = UnitVectorY;
+    getUnitVectorOnDirectionOfCrossProduct(UnitVectorX, VectorXY, UnitVectorZ);
+    coordinateSystemWritenInOldSystem->UnitVectorZ = UnitVectorZ;
 
     // Create and log the unit vector Y
-    gsl_vector* UnitVectorY = create_unit_vector(&origin, &pointOnXY);
-    coordinateSystem->UnitVectorY = UnitVectorY;
+    cross_product(UnitVectorZ, UnitVectorX, UnitVectorY);
+    coordinateSystemWritenInOldSystem->UnitVectorZ = UnitVectorZ;
+    gsl_vector_free(VectorXY);
 
-    // Create and log the unit vector Z (cross product of X and Y)
-    gsl_vector* product = gsl_vector_alloc(3);
-    cross_product(UnitVectorX, UnitVectorY, product);
-    coordinateSystem->UnitVectorZ = product;
-
-    return coordinateSystem;
+    return coordinateSystemWritenInOldSystem;
 }
 
 // Free the memory allocated for the coordinate system
@@ -69,7 +60,7 @@ void freeCoordinateSystem(CoordinateSystem** coordinateSystem) {
     }
 }
 
-void createTransformationMatrix(CoordinateSystem *newCoordinateSystemInnOldLayout,
+void createTransformationMatrix(const CoordinateSystem *newCoordinateSystemInnOldLayout,
     gsl_matrix *OldToNewTransformationMatrix) {
 
     // Set the first column of the transformation matrix to UnitVectorX

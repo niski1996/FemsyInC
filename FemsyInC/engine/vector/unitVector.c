@@ -20,3 +20,10 @@ void createUnitVectorFromPoints(const Point *start, const Point *end, gsl_vector
     // Normalize the vector to get the unit vector
     gsl_vector_scale(outputUnitVector, 1.0 / norm);
 }
+
+void getUnitVectorOnDirectionOfCrossProduct(const gsl_vector *u, const gsl_vector *v, gsl_vector *versor) {
+    cross_product(u,v,versor);
+    double norm = gsl_blas_dnrm2(versor);
+    gsl_vector_scale(versor, 1.0 / norm);
+
+}

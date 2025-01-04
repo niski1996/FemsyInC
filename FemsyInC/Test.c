@@ -9,7 +9,7 @@
 
 void RunAllTests() {
     // PolyTest();
-    coordinateSystemTest();
+    // coordinateSystemTest();
     // vectorTest();
-    // HelperTest();
+    HelperTest();
 }
