@@ -5,6 +5,8 @@
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
+#include <fcntl.h>
 
 #include "HelperTest.h"
 #include "../helpers/helper.h"
@@ -67,42 +69,36 @@ void ForMatrixOfElementInsertNodesCoordinates_HandlesNullNodes() {
 
     assert(coords == NULL);
 }
-//
-// void ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsCorrectCoordinateSystems() {
-//     TriangleElementGeometry elements[2] = {
-//         {{{0.0, 0.0, 0.0}, {1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}}},
-//         {{{1.0, 1.0, 0.0}, {2.0, 1.0, 0.0}, {1.0, 2.0, 0.0}}}
-//     };
-//
-//     CoordinateSystem** coordinateSystemCollection = ForMatrixOfElementCreateCo_planarCoordinateSystem(elements, 2);
-//
-//     assert(coordinateSystemCollection != NULL);
-//     assert(coordinateSystemCollection[0] != NULL);
-//     assert(coordinateSystemCollection[1] != NULL);
-//
-//     freeCoordinateSystem(&coordinateSystemCollection[0]);
-//     freeCoordinateSystem(&coordinateSystemCollection[1]);
-//     free(coordinateSystemCollection);
-// }
-//
-// void ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsNULLForEmptyList() {
-//     CoordinateSystem** coordinateSystems = ForMatrixOfElementCreateCo_planarCoordinateSystem(NULL, 0);
-//     assert(coordinateSystems == NULL);
-// }
-//
-// void ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsNULLForFailedAllocation() {
-//     // Simulate memory allocation failure by setting elements_count to a very large number
-//     CoordinateSystem** coordinateSystems = ForMatrixOfElementCreateCo_planarCoordinateSystem(NULL, UINT_MAX);
-//     assert(coordinateSystems == NULL);
-// }
+
+void ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsCorrectCoordinateSystems() {
+    TriangleElementGeometry elements[2] = {
+        {{{0.0, 0.0, 0.0}, {1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}}},
+        {{{1.0, 1.0, 0.0}, {2.0, 1.0, 0.0}, {1.0, 2.0, 0.0}}}
+    };
+
+    CoordinateSystem** coordinateSystemCollection = ForMatrixOfElementCreateCo_planarCoordinateSystem(elements, 2);
+
+    assert(coordinateSystemCollection != NULL);
+    assert(coordinateSystemCollection[0] != NULL);
+    assert(coordinateSystemCollection[1] != NULL);
+
+    freeCoordinateSystem(&coordinateSystemCollection[0]);
+    freeCoordinateSystem(&coordinateSystemCollection[1]);
+    free(coordinateSystemCollection);
+}
+
+
+void ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsNULLForFailedAllocation() {
+    CoordinateSystem** coordinateSystems = ForMatrixOfElementCreateCo_planarCoordinateSystem(NULL, UINT_MAX);
+    assert(coordinateSystems == NULL);
+}
 
 
 void HelperTest() {
-    // ForMatrixOfElementInsertNodesCoordinates_ReturnsCorrectCoordinates();
-    // ForMatrixOfElementInsertNodesCoordinates_HandlesEmptyElements();
-    // ForMatrixOfElementInsertNodesCoordinates_HandlesNullNodes();
-    // ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsCorrectCoordinateSystems();
-    // ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsNULLForEmptyList();
+    ForMatrixOfElementInsertNodesCoordinates_ReturnsCorrectCoordinates();
+    ForMatrixOfElementInsertNodesCoordinates_HandlesEmptyElements();
+    ForMatrixOfElementInsertNodesCoordinates_HandlesNullNodes();
+    ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsCorrectCoordinateSystems();
     // ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsNULLForFailedAllocation();
 
 

@@ -6,10 +6,12 @@
 #include  "helpers/HelperTest.h"
 #include "engine/vector/vectorTest.h"
 #include "engine/coordinateSystem/coordinateSystemTest.h"
+#include "engine/matrix/matrixTest.h"
 
 void RunAllTests() {
     // PolyTest();
     // coordinateSystemTest();
     // vectorTest();
     HelperTest();
+    // matrixTest();
 }

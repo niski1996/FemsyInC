@@ -4,7 +4,6 @@
 
 #ifndef VECTOR_H
 #define VECTOR_H
-#include <gsl/gsl_vector.h>
 #include <gsl/gsl_blas.h>
 #include "../../models/types.h"
 

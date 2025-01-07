@@ -3,6 +3,6 @@ add_library(helper STATIC InputHelper.c
         HelperTest.h
         HelperTest.c
         transformationHelper.c
-        a.c)
+)
 
-target_link_libraries(helper PUBLIC model)
+target_link_libraries(helper PUBLIC coordinateSystem)
