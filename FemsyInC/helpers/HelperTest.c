@@ -177,6 +177,21 @@ void TransformElementGeometryToNewCoordinateSystem_HandlesZeroMatrix() {
     gsl_matrix_free(transformationMatrix);
 }
 
+void readElementsFromCSV_ReturnsCorrectNumberOfElements() {
+    int **nodeNumberCollection = NULL;
+    int count = readElementsFromCSV("/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/input/example/elements.csv", &nodeNumberCollection);
+
+    assert(count == 1862);
+    assert(nodeNumberCollection != NULL);
+    assert(nodeNumberCollection[0][0] == 49 && nodeNumberCollection[0][1] == 99 && nodeNumberCollection[0][2] == 98);
+    assert(nodeNumberCollection[1][0] == 49 && nodeNumberCollection[1][1] == 98 && nodeNumberCollection[1][2] == 48);
+
+    for (int i = 0; i < count; i++) {
+        free(nodeNumberCollection[i]);
+    }
+    free(nodeNumberCollection);
+}
+
 void readPointsFromCSV_ReturnsCorrectNumberOfPoints() {
     Point *points = NULL;
     int count = readPointsFromCSV("/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/input/example/nodes.csv", &points);
@@ -197,8 +212,9 @@ void readPointsFromCSV_ReturnsCorrectNumberOfPoints() {
 
 
 void HelperTest() {
-    readPointsFromCSV_ReturnsCorrectNumberOfPoints();
-    TransformPointToNewCoordinateSystem_ReturnsCorrectCoordinates();
+    // readPointsFromCSV_ReturnsCorrectNumberOfPoints();
+    // TransformPointToNewCoordinateSystem_ReturnsCorrectCoordinates();
+    readElementsFromCSV_ReturnsCorrectNumberOfElements();
     // TransformPointToNewCoordinateSystem_HandlesZeroMatrix();
     // TransformElementGeometryToNewCoordinateSystem_ReturnsCorrectCoordinates();
     // TransformElementGeometryToNewCoordinateSystem_HandlesZeroMatrix();

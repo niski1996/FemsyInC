@@ -40,6 +40,72 @@ const char* getfield(char* line, int num) {
     return NULL;
 }
 
+int readElementsFromCSV(const char *path, int (**nodeNumberCollection)[3]) {
+    FILE *stream = fopen(path, "r");
+    if (!stream) {
+        perror("Error opening file");
+        return -1;
+    }
+
+    int capacity = 10;
+    int rowCount = 0;
+
+    // Alokacja pamięci dla macierzy
+    *nodeNumberCollection = (int (*)[3]) malloc(capacity * sizeof(int[3]));
+    if (!*nodeNumberCollection) {
+        perror("Memory allocation error");
+        fclose(stream);
+        return -1;
+    }
+
+    char line[1024];
+    if (fgets(line, sizeof(line), stream) == NULL) {
+        fclose(stream);
+        free(*nodeNumberCollection);
+        return -1;
+    }
+
+    while (fgets(line, sizeof(line), stream)) {
+        if (rowCount >= capacity) {
+            capacity *= 2;
+            int (*temp)[3] = (int (*)[3]) realloc(*nodeNumberCollection, capacity * sizeof(int[3]));
+            if (!temp) {
+                perror("Memory allocation error during reallocation");
+                free(*nodeNumberCollection);
+                fclose(stream);
+                return -1;
+            }
+            *nodeNumberCollection = temp;
+        }
+
+        char *tmp = strdup(line);
+        if (!tmp) {
+            perror("Memory allocation error");
+            free(*nodeNumberCollection);
+            fclose(stream);
+            return -1;
+        }
+
+        (*nodeNumberCollection)[rowCount][0] = atoi(getfield(tmp, 1));
+        free(tmp);
+
+        tmp = strdup(line);
+        (*nodeNumberCollection)[rowCount][1] = atoi(getfield(tmp, 2));
+        free(tmp);
+
+        tmp = strdup(line);
+        (*nodeNumberCollection)[rowCount][2] = atoi(getfield(tmp, 3));
+        free(tmp);
+
+        rowCount++;
+    }
+
+    fclose(stream);
+    return rowCount;
+}
+
+
+
 int readPointsFromCSV(const char *path, Point **pointCollection) {
     FILE* stream = fopen(path, "r");
     if (!stream) {
