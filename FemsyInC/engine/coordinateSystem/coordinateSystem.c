@@ -61,14 +61,24 @@ void freeCoordinateSystem(CoordinateSystem** coordinateSystem) {
 }
 
 void createTransformationMatrix(const CoordinateSystem *newCoordinateSystemInnOldLayout,
-    gsl_matrix *OldToNewTransformationMatrix) {
+    gsl_matrix *OutputOldToNewTransformationMatrix) {
 
     // Set the first column of the transformation matrix to UnitVectorX
-    gsl_matrix_set_col(OldToNewTransformationMatrix, 0, newCoordinateSystemInnOldLayout->UnitVectorX);
+    gsl_matrix_set_col(OutputOldToNewTransformationMatrix, 0, newCoordinateSystemInnOldLayout->UnitVectorX);
 
     // Set the second column of the transformation matrix to UnitVectorY
-    gsl_matrix_set_col(OldToNewTransformationMatrix, 1, newCoordinateSystemInnOldLayout->UnitVectorY);
+    gsl_matrix_set_col(OutputOldToNewTransformationMatrix, 1, newCoordinateSystemInnOldLayout->UnitVectorY);
 
     // Set the third column of the transformation matrix to UnitVectorZ
-    gsl_matrix_set_col(OldToNewTransformationMatrix, 2, newCoordinateSystemInnOldLayout->UnitVectorZ);
+    gsl_matrix_set_col(OutputOldToNewTransformationMatrix, 2, newCoordinateSystemInnOldLayout->UnitVectorZ);
+}
+
+void forCollectionOfCoordinateSystemsCreateTransformationMatrices(
+    const CoordinateSystem** coordinateSystems,
+    unsigned int count,
+    gsl_matrix** OutputTransformationMatrices) {
+
+    for (unsigned int i = 0; i < count; ++i) {
+        createTransformationMatrix(coordinateSystems[i], OutputTransformationMatrices[i]);
+    }
 }

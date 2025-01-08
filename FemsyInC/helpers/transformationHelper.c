@@ -41,3 +41,39 @@ CoordinateSystem** ForMatrixOfElementCreateCo_planarCoordinateSystem(const Trian
 
     return coordinateSystemsList;
 }
+void TransformPointToNewCoordinateSystem(
+    const Point *point,
+    const gsl_matrix *transformationMatrix,
+    Point *result) {
+
+    // Create a 3x1 matrix for the point
+    gsl_matrix *pointMatrix = gsl_matrix_alloc(3, 1);
+    gsl_matrix_set(pointMatrix, 0, 0, point->x);
+    gsl_matrix_set(pointMatrix, 1, 0, point->y);
+    gsl_matrix_set(pointMatrix, 2, 0, point->z);
+
+    // Create a 3x1 matrix for the result
+    gsl_matrix *resultMatrix = gsl_matrix_alloc(3, 1);
+
+    // Multiply the transformation matrix with the point matrix
+    gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1.0, transformationMatrix, pointMatrix, 0.0, resultMatrix);
+
+    // Set the result point
+    result->x = gsl_matrix_get(resultMatrix, 0, 0);
+    result->y = gsl_matrix_get(resultMatrix, 1, 0);
+    result->z = gsl_matrix_get(resultMatrix, 2, 0);
+
+    // Free the allocated matrices
+    gsl_matrix_free(pointMatrix);
+    gsl_matrix_free(resultMatrix);
+}
+
+void transformElementGeometryToNewCoordinateSystem(
+    const TriangleElementGeometry *triangleElementGeometry,
+    const gsl_matrix *transformationMatrix,
+    TriangleElementGeometry *result) {
+
+    TransformPointToNewCoordinateSystem(&triangleElementGeometry->nodes[0], transformationMatrix, &result->nodes[0]);
+    TransformPointToNewCoordinateSystem(&triangleElementGeometry->nodes[1], transformationMatrix, &result->nodes[1]);
+    TransformPointToNewCoordinateSystem(&triangleElementGeometry->nodes[2], transformationMatrix, &result->nodes[2]);
+}

@@ -28,3 +28,56 @@ TriangleElementGeometry* ForMatrixOfElementInsertNodesCoordinates(unsigned int *
 
     return triangleElementGeometries;
 }
+
+int readPointsFromCSV(const char *path, Point **pointCollection) {
+    FILE *file = fopen(path, "r");
+    if (!file) {
+        perror("Error opening file");
+        return -1;
+    }
+
+    // Allocate an initial array (resizable)
+    int capacity = 10;
+    int count = 0;
+    *pointCollection = (Point *)malloc(capacity * sizeof(Point));
+    if (!*pointCollection) {
+        perror("Memory allocation error");
+        fclose(file);
+        return -1;
+    }
+
+    // Skip the header line
+    char line[256];
+    if (fgets(line, sizeof(line), file) == NULL) {
+        fclose(file);
+        return -1;
+    }
+
+    // Read each row
+    while (fgets(line, sizeof(line), file)) {
+        if (count >= capacity) {
+            capacity *= 2;
+            *pointCollection = (Point *)realloc(*pointCollection, capacity * sizeof(Point));
+            if (!*pointCollection) {
+                perror("Memory allocation error");
+                fclose(file);
+                return -1;
+            }
+        }
+
+        // Parse the line
+        if (sscanf(line, "%d,%lf,%lf,%lf",
+                   &count,
+                   &(*pointCollection)[count].x,
+                   &(*pointCollection)[count].y,
+                   &(*pointCollection)[count].z) != 4) {
+            fprintf(stderr, "Error parsing line: %s\n", line);
+            continue;
+                   }
+
+        count++;
+    }
+
+    fclose(file);
+    return count; // Return the number of pointCollection read
+}

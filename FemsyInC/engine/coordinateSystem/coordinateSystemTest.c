@@ -104,11 +104,64 @@ void CreateTransformationMatrix_ReturnsCorrectMatrix() {
     freeCoordinateSystem(&coordinateSystem);
 }
 
+void ForCollectionOfCoordinateSystemsCreateTransformationMatrices_CreatesCorrectMatrices() {
+    Point origin1 = {0.0, 0.0, 0.0};
+    Point pointOnX1 = {1.0, 0.0, 0.0};
+    Point pointOnXY1 = {0.0, 1.0, 0.0};
+    CoordinateSystem *coordinateSystem1 = createCoordinateSystemFromThreeNonLinearPoints(origin1, pointOnX1, pointOnXY1);
+
+    Point origin2 = {1.0, 1.0, 1.0};
+    Point pointOnX2 = {2.0, 1.0, 1.0};
+    Point pointOnXY2 = {1.0, 2.0, 1.0};
+    CoordinateSystem *coordinateSystem2 = createCoordinateSystemFromThreeNonLinearPoints(origin2, pointOnX2, pointOnXY2);
+
+    const CoordinateSystem* coordinateSystems[] = {coordinateSystem1, coordinateSystem2};
+    unsigned int count = 2;
+
+    gsl_matrix *transformationMatrix1 = gsl_matrix_alloc(3, 3);
+    gsl_matrix *transformationMatrix2 = gsl_matrix_alloc(3, 3);
+    gsl_matrix *OutputTransformationMatrices[] = {transformationMatrix1, transformationMatrix2};
+
+    forCollectionOfCoordinateSystemsCreateTransformationMatrices(coordinateSystems, count, OutputTransformationMatrices);
+
+    // Validate the first transformation matrix
+    assert(fabs(gsl_matrix_get(transformationMatrix1, 0, 0) - 1.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix1, 1, 0) - 0.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix1, 2, 0) - 0.0) < 1e-6);
+
+    assert(fabs(gsl_matrix_get(transformationMatrix1, 0, 1) - 0.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix1, 1, 1) - 1.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix1, 2, 1) - 0.0) < 1e-6);
+
+    assert(fabs(gsl_matrix_get(transformationMatrix1, 0, 2) - 0.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix1, 1, 2) - 0.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix1, 2, 2) - 1.0) < 1e-6);
+
+    // Validate the second transformation matrix
+    assert(fabs(gsl_matrix_get(transformationMatrix2, 0, 0) - 1.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix2, 1, 0) - 0.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix2, 2, 0) - 0.0) < 1e-6);
+
+    assert(fabs(gsl_matrix_get(transformationMatrix2, 0, 1) - 0.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix2, 1, 1) - 1.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix2, 2, 1) - 0.0) < 1e-6);
+
+    assert(fabs(gsl_matrix_get(transformationMatrix2, 0, 2) - 0.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix2, 1, 2) - 0.0) < 1e-6);
+    assert(fabs(gsl_matrix_get(transformationMatrix2, 2, 2) - 1.0) < 1e-6);
+
+    gsl_matrix_free(transformationMatrix1);
+    gsl_matrix_free(transformationMatrix2);
+    freeCoordinateSystem(&coordinateSystem1);
+    freeCoordinateSystem(&coordinateSystem2);
+}
+
 
 void coordinateSystemTest() {
     CreateCoordinateSystemFromThreeNonLinearPoints_ReturnsCorrectResult();
     test_createTransformationMatrix();
     CreateTransformationMatrix_ReturnsCorrectMatrix();
+    ForCollectionOfCoordinateSystemsCreateTransformationMatrices_CreatesCorrectMatrices();
     // test_freeCoordinateSystem();
 
     printf("All coordinateSystem Test passed.\n");

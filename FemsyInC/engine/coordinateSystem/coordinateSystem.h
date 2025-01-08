@@ -9,7 +9,17 @@
 #ifndef COORDINATESYSTEM_H
 #define COORDINATESYSTEM_H
 
-CoordinateSystem* createCoordinateSystemFromThreeNonLinearPoints(Point origin, Point pointOnX, Point pointOnXY);
-void freeCoordinateSystem(CoordinateSystem** coordinateSystem);
-void createTransformationMatrix(const CoordinateSystem* newCoordinateSystemInnOldLayout, gsl_matrix* OldToNewTransformationMatrix);
+CoordinateSystem* createCoordinateSystemFromThreeNonLinearPoints(
+    Point origin,
+    Point pointOnX,
+    Point pointOnXY);
+void freeCoordinateSystem(
+    CoordinateSystem** coordinateSystem);
+void createTransformationMatrix(
+    const CoordinateSystem* newCoordinateSystemInnOldLayout,
+    gsl_matrix* OutputOldToNewTransformationMatrix);
+void forCollectionOfCoordinateSystemsCreateTransformationMatrices(
+    const CoordinateSystem** coordinateSystems,
+    unsigned int count,
+    gsl_matrix** OutputTransformationMatrices);
 #endif //COORDINATESYSTEM_H

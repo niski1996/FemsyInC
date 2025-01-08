@@ -93,8 +93,97 @@ void ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsNULLForFailedAlloc
     assert(coordinateSystems == NULL);
 }
 
+void TransformPointToNewCoordinateSystem_ReturnsCorrectCoordinates() {
+    Point point = {1.0, 2.0, 3.0};
+    gsl_matrix *transformationMatrix = gsl_matrix_alloc(3, 3);
+    gsl_matrix_set_identity(transformationMatrix);
+    Point result;
+
+    TransformPointToNewCoordinateSystem(&point, transformationMatrix, &result);
+
+    assert(result.x == 1.0);
+    assert(result.y == 2.0);
+    assert(result.z == 3.0);
+
+    gsl_matrix_free(transformationMatrix);
+}
+
+void TransformPointToNewCoordinateSystem_HandlesZeroMatrix() {
+    Point point = {1.0, 2.0, 3.0};
+    gsl_matrix *transformationMatrix = gsl_matrix_alloc(3, 3);
+    gsl_matrix_set_zero(transformationMatrix);
+    Point result;
+
+    TransformPointToNewCoordinateSystem(&point, transformationMatrix, &result);
+
+    assert(result.x == 0.0);
+    assert(result.y == 0.0);
+    assert(result.z == 0.0);
+
+    gsl_matrix_free(transformationMatrix);
+}
+
+void TransformElementGeometryToNewCoordinateSystem_ReturnsCorrectCoordinates() {
+    TriangleElementGeometry triangleElementGeometry = {
+        .nodes = {
+            {1.0, 2.0, 3.0},
+            {4.0, 5.0, 6.0},
+            {7.0, 8.0, 9.0}
+        }
+    };
+    gsl_matrix *transformationMatrix = gsl_matrix_alloc(3, 3);
+    gsl_matrix_set_identity(transformationMatrix);
+    TriangleElementGeometry result;
+
+    transformElementGeometryToNewCoordinateSystem(&triangleElementGeometry, transformationMatrix, &result);
+
+    assert(result.nodes[0].x == 1.0);
+    assert(result.nodes[0].y == 2.0);
+    assert(result.nodes[0].z == 3.0);
+    assert(result.nodes[1].x == 4.0);
+    assert(result.nodes[1].y == 5.0);
+    assert(result.nodes[1].z == 6.0);
+    assert(result.nodes[2].x == 7.0);
+    assert(result.nodes[2].y == 8.0);
+    assert(result.nodes[2].z == 9.0);
+
+    gsl_matrix_free(transformationMatrix);
+}
+
+void TransformElementGeometryToNewCoordinateSystem_HandlesZeroMatrix() {
+    TriangleElementGeometry triangleElementGeometry = {
+        .nodes = {
+            {1.0, 2.0, 3.0},
+            {4.0, 5.0, 6.0},
+            {7.0, 8.0, 9.0}
+        }
+    };
+    gsl_matrix *transformationMatrix = gsl_matrix_alloc(3, 3);
+    gsl_matrix_set_zero(transformationMatrix);
+    TriangleElementGeometry result;
+
+    transformElementGeometryToNewCoordinateSystem(&triangleElementGeometry, transformationMatrix, &result);
+
+    assert(result.nodes[0].x == 0.0);
+    assert(result.nodes[0].y == 0.0);
+    assert(result.nodes[0].z == 0.0);
+    assert(result.nodes[1].x == 0.0);
+    assert(result.nodes[1].y == 0.0);
+    assert(result.nodes[1].z == 0.0);
+    assert(result.nodes[2].x == 0.0);
+    assert(result.nodes[2].y == 0.0);
+    assert(result.nodes[2].z == 0.0);
+
+    gsl_matrix_free(transformationMatrix);
+}
+
+
 
 void HelperTest() {
+    TransformPointToNewCoordinateSystem_ReturnsCorrectCoordinates();
+    TransformPointToNewCoordinateSystem_HandlesZeroMatrix();
+    TransformElementGeometryToNewCoordinateSystem_ReturnsCorrectCoordinates();
+    TransformElementGeometryToNewCoordinateSystem_HandlesZeroMatrix();
     ForMatrixOfElementInsertNodesCoordinates_ReturnsCorrectCoordinates();
     ForMatrixOfElementInsertNodesCoordinates_HandlesEmptyElements();
     ForMatrixOfElementInsertNodesCoordinates_HandlesNullNodes();
