@@ -76,21 +76,20 @@ void ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsCorrectCoordinateS
         {{{1.0, 1.0, 0.0}, {2.0, 1.0, 0.0}, {1.0, 2.0, 0.0}}}
     };
 
-    CoordinateSystem** coordinateSystemCollection = ForMatrixOfElementCreateCo_planarCoordinateSystem(elements, 2);
+    CoordinateSystem* coordinateSystemCollection[2] = {NULL, NULL};
+    ForMatrixOfElementCreateCo_planarCoordinateSystem(elements, 2, coordinateSystemCollection);
 
-    assert(coordinateSystemCollection != NULL);
     assert(coordinateSystemCollection[0] != NULL);
     assert(coordinateSystemCollection[1] != NULL);
 
     freeCoordinateSystem(&coordinateSystemCollection[0]);
     freeCoordinateSystem(&coordinateSystemCollection[1]);
-    free(coordinateSystemCollection);
 }
 
-
 void ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsNULLForFailedAllocation() {
-    CoordinateSystem** coordinateSystems = ForMatrixOfElementCreateCo_planarCoordinateSystem(NULL, UINT_MAX);
-    assert(coordinateSystems == NULL);
+    CoordinateSystem* coordinateSystems[1] = {NULL};
+    ForMatrixOfElementCreateCo_planarCoordinateSystem(NULL, UINT_MAX, coordinateSystems);
+    assert(coordinateSystems[0] == NULL);
 }
 
 void TransformPointToNewCoordinateSystem_ReturnsCorrectCoordinates() {

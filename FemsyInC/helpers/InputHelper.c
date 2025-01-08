@@ -6,7 +6,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-TriangleElementGeometry* ForMatrixOfElementInsertNodesCoordinates(unsigned int *elements, unsigned int elements_count, Point *nodes, int *nodesCount) {
+TriangleElementGeometry* ForMatrixOfElementInsertNodesCoordinates(
+    unsigned int (**nodeNumberCollection)[3],
+    unsigned int elements_count, Point *nodes,
+    int *nodesCount) {
     if (elements_count == 0 || nodes == NULL) {
         *nodesCount = 0;
         return NULL;
@@ -21,15 +24,13 @@ TriangleElementGeometry* ForMatrixOfElementInsertNodesCoordinates(unsigned int *
     *nodesCount = 0;
     for (unsigned int i = 0; i < elements_count; i++) {
         for (unsigned int j = 0; j < 3; j++) {
-            unsigned int node_index = elements[i * 3 + j];
+            unsigned int node_index = (*nodeNumberCollection)[i][j];
             triangleElementGeometries[i].nodes[j] = nodes[node_index];
             (*nodesCount)++;
         }
     }
-
     return triangleElementGeometries;
 }
-
 
 const char* getfield(char* line, int num) {
     const char* tok;
@@ -40,7 +41,7 @@ const char* getfield(char* line, int num) {
     return NULL;
 }
 
-int readElementsFromCSV(const char *path, int (**nodeNumberCollection)[3]) {
+int readElementsFromCSV(const char *path, unsigned int (**nodeNumberCollection)[3]) {
     FILE *stream = fopen(path, "r");
     if (!stream) {
         perror("Error opening file");
@@ -50,8 +51,7 @@ int readElementsFromCSV(const char *path, int (**nodeNumberCollection)[3]) {
     int capacity = 10;
     int rowCount = 0;
 
-    // Alokacja pamięci dla macierzy
-    *nodeNumberCollection = (int (*)[3]) malloc(capacity * sizeof(int[3]));
+    *nodeNumberCollection = (unsigned int (*)[3]) malloc(capacity * sizeof(int[3]));
     if (!*nodeNumberCollection) {
         perror("Memory allocation error");
         fclose(stream);
@@ -103,8 +103,6 @@ int readElementsFromCSV(const char *path, int (**nodeNumberCollection)[3]) {
     fclose(stream);
     return rowCount;
 }
-
-
 
 int readPointsFromCSV(const char *path, Point **pointCollection) {
     FILE* stream = fopen(path, "r");

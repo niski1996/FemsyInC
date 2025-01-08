@@ -11,12 +11,14 @@
 
 
 TriangleElementGeometry* ForMatrixOfElementInsertNodesCoordinates(
-    unsigned int *elements,
+    unsigned int (**elements)[3],
     unsigned int elements_count, Point *nodes,
     int *nodesCount);
-CoordinateSystem** ForMatrixOfElementCreateCo_planarCoordinateSystem(
+
+void ForMatrixOfElementCreateCo_planarCoordinateSystem(
     const TriangleElementGeometry *triangleElementGeometries,
-    unsigned int elements_count);
+    unsigned int elements_count,
+    CoordinateSystem** outputCoordinateSystemCollection);
 
 TriangleElementGeometry* TransformElementCollectionToNewCoordinateSystem(
     const TriangleElementGeometry **triangleElementGeometryCollection,
@@ -34,7 +36,7 @@ void transformElementGeometryToNewCoordinateSystem(
     TriangleElementGeometry *result);
 
 int readPointsFromCSV(const char *path, int **pointCollection);
-int readElementsFromCSV(const char *path, int (**nodeNumberCollection)[3]);
+int readElementsFromCSV(const char *path, unsigned int (**nodeNumberCollection)[3]);
 
 
 #endif //HELPER_H
