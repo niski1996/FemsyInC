@@ -4,6 +4,7 @@
 #include "../models/types.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 TriangleElementGeometry* ForMatrixOfElementInsertNodesCoordinates(unsigned int *elements, unsigned int elements_count, Point *nodes, int *nodesCount) {
     if (elements_count == 0 || nodes == NULL) {
@@ -29,55 +30,76 @@ TriangleElementGeometry* ForMatrixOfElementInsertNodesCoordinates(unsigned int *
     return triangleElementGeometries;
 }
 
+
+const char* getfield(char* line, int num) {
+    const char* tok;
+    for (tok = strtok(line, ","); tok && *tok; tok = strtok(NULL, ",\n")) {
+        if (!--num)
+            return tok;
+    }
+    return NULL;
+}
+
 int readPointsFromCSV(const char *path, Point **pointCollection) {
-    FILE *file = fopen(path, "r");
-    if (!file) {
+    FILE* stream = fopen(path, "r");
+    if (!stream) {
         perror("Error opening file");
         return -1;
     }
 
-    // Allocate an initial array (resizable)
     int capacity = 10;
-    int count = 0;
+    int rowCount = 0;
     *pointCollection = (Point *)malloc(capacity * sizeof(Point));
     if (!*pointCollection) {
         perror("Memory allocation error");
-        fclose(file);
+        fclose(stream);
         return -1;
     }
 
     // Skip the header line
-    char line[256];
-    if (fgets(line, sizeof(line), file) == NULL) {
-        fclose(file);
+    char line[1024];
+    if (fgets(line, sizeof(line), stream) == NULL) {
+        fclose(stream);
         return -1;
     }
 
     // Read each row
-    while (fgets(line, sizeof(line), file)) {
-        if (count >= capacity) {
+    while (fgets(line, sizeof(line), stream)) {
+        if (rowCount >= capacity) {
             capacity *= 2;
-            *pointCollection = (Point *)realloc(*pointCollection, capacity * sizeof(Point));
-            if (!*pointCollection) {
+            Point *temp = (Point *)realloc(*pointCollection, capacity * sizeof(Point));
+            if (!temp) {
                 perror("Memory allocation error");
-                fclose(file);
+                free(*pointCollection);
+                fclose(stream);
                 return -1;
             }
+            *pointCollection = temp;
         }
 
-        // Parse the line
-        if (sscanf(line, "%d,%lf,%lf,%lf",
-                   &count,
-                   &(*pointCollection)[count].x,
-                   &(*pointCollection)[count].y,
-                   &(*pointCollection)[count].z) != 4) {
-            fprintf(stderr, "Error parsing line: %s\n", line);
-            continue;
-                   }
+        char* tmp = strdup(line);
+        if (!tmp) {
+            perror("Memory allocation error");
+            free(*pointCollection);
+            fclose(stream);
+            return -1;
+        }
 
-        count++;
+        (*pointCollection)[rowCount].x = atof(getfield(tmp, 2));
+        free(tmp);
+
+        tmp = strdup(line);
+        (*pointCollection)[rowCount].y = atof(getfield(tmp, 3));
+        free(tmp);
+
+        tmp = strdup(line);
+        (*pointCollection)[rowCount].z = atof(getfield(tmp, 4));
+        free(tmp);
+
+        rowCount++;
     }
 
-    fclose(file);
-    return count; // Return the number of pointCollection read
+    fclose(stream);
+
+    return rowCount;
 }

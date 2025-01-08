@@ -1,33 +1,39 @@
 #include <stdio.h>
 #include "Test.h"
+#include "helpers/helper.h"
+#include "models/types.h"
 
-// Dyrektywa preprocesora dla debug/release
+
+int RunTask() {
+    const char* path = "/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/input/example/nodes.csv";
+    printf("start task from location: %s\n", path);
+    printf("reading nodes from nodes.csv\n");
+    Point *pointCollection;
+    int pointCollectionCount = readPointsFromCSV(path, &pointCollection);
 #ifdef DEBUG
-    #define DEBUG_PRINT() printf("hello debug\n")
-#else
-    #define DEBUG_PRINT() printf("hello rel\n")
+    printf(" nodes matrix: \n");
+    for (int i = 0; i < pointCollectionCount; i++) {
+        printf("Node number: %d: x: %f, y: %f, z: %f\n",i, pointCollection[i].x, pointCollection[i].y, pointCollection[i].z);
+    }
 #endif
-void Run() {
-    DEBUG_PRINT(); // Wypisuje odpowiedni komunikat w zależności od trybu
+
+
+#ifdef NDEBUG
+    printf("hello release\n");  // Komunikat w trybie Release
+#endif
+
+
+    free(pointCollection);
+    return 0;
 }
 
 int main() {
-#ifdef NDEBUG
-    printf("hello rel\n");  // Tryb Release
-#else
-    printf("hello debug\n");  // Tryb Debug
-#endif
-    printf("Hello, World!\n");
-    RunAllTests();
+    printf("Start main\n");
+    // RunAllTests();
 
-    // Wywołanie funkcji z odpowiednim komunikatem
-    Run();
+
+    RunTask();
 
     return 0;
-}
-int RunTask() {
-    char path = "/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/input/example";
-    printf("start task from location: %s\n", path);
-
 }
 

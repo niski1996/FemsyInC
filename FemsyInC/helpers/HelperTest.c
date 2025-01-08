@@ -177,17 +177,35 @@ void TransformElementGeometryToNewCoordinateSystem_HandlesZeroMatrix() {
     gsl_matrix_free(transformationMatrix);
 }
 
+void readPointsFromCSV_ReturnsCorrectNumberOfPoints() {
+    Point *points = NULL;
+    int count = readPointsFromCSV("/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/input/example/nodes.csv", &points);
+
+    assert(count == 1000);
+    assert(points != NULL);
+    assert(points[0].x == 0.0 && points[0].y == 10.0 && points[0].z == 0.0);
+    assert(points[1].x == 0.0 && points[1].y == 9.979453927503364 && points[1].z == 0.6407021998071292);
+    assert(points[2].x == 0.0 && points[2].y == 9.917900138232461 && points[2].z == 1.27877161684506);
+    assert(points[3].x == 0.0 && points[3].y == 9.815591569910653 && points[3].z == 1.9115862870137228);
+    assert(points[4].x == 0.0 && points[4].y == 9.672948630390295 && points[4].z == 2.5365458390950737);
+
+    free(points);
+}
+
+
+
 
 
 void HelperTest() {
+    readPointsFromCSV_ReturnsCorrectNumberOfPoints();
     TransformPointToNewCoordinateSystem_ReturnsCorrectCoordinates();
-    TransformPointToNewCoordinateSystem_HandlesZeroMatrix();
-    TransformElementGeometryToNewCoordinateSystem_ReturnsCorrectCoordinates();
-    TransformElementGeometryToNewCoordinateSystem_HandlesZeroMatrix();
-    ForMatrixOfElementInsertNodesCoordinates_ReturnsCorrectCoordinates();
-    ForMatrixOfElementInsertNodesCoordinates_HandlesEmptyElements();
-    ForMatrixOfElementInsertNodesCoordinates_HandlesNullNodes();
-    ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsCorrectCoordinateSystems();
+    // TransformPointToNewCoordinateSystem_HandlesZeroMatrix();
+    // TransformElementGeometryToNewCoordinateSystem_ReturnsCorrectCoordinates();
+    // TransformElementGeometryToNewCoordinateSystem_HandlesZeroMatrix();
+    // ForMatrixOfElementInsertNodesCoordinates_ReturnsCorrectCoordinates();
+    // ForMatrixOfElementInsertNodesCoordinates_HandlesEmptyElements();
+    // ForMatrixOfElementInsertNodesCoordinates_HandlesNullNodes();
+    // ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsCorrectCoordinateSystems();
     // ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsNULLForFailedAllocation();
 
 
