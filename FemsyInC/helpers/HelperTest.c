@@ -11,8 +11,8 @@
 #include "HelperTest.h"
 #include "../helpers/helper.h"
 #include "../models/types.h"
-#include "../engine/vector/vector.h"
-#include "../engine/coordinateSystem/coordinateSystem.h"
+#include "../core/vector/vector.h"
+#include "../core/coordinateSystem/coordinateSystem.h"
 
 void ForMatrixOfElementInsertNodesCoordinates_ReturnsCorrectCoordinates() {
     Point nodes[] = {

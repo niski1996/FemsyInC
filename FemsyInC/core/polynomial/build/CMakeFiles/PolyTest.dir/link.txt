@@ -1,0 +1,1 @@
+/usr/bin/cc  -Wall CMakeFiles/PolyTest.dir/PolyTest.c.o CMakeFiles/PolyTest.dir/PolyHelper.c.o CMakeFiles/PolyTest.dir/PolyAdd.c.o CMakeFiles/PolyTest.dir/PolyFree.c.o CMakeFiles/PolyTest.dir/PolyPrint.c.o -o PolyTest  -lm 

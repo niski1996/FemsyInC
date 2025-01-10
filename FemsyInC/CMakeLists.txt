@@ -13,7 +13,7 @@ find_package(GSL REQUIRED)
 add_executable(FemsyInC main.c
         Test.c
         Test.h)
-add_subdirectory(engine)
+add_subdirectory(core)
 add_subdirectory(models)
 add_subdirectory(helpers)
 target_link_libraries(FemsyInC PRIVATE coordinateSystem)

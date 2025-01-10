@@ -2,11 +2,11 @@
 // Created by kali on 12/31/24.
 //
 #include <stdio.h>
-#include "engine/polynomial/PolyTest.h"
+#include "core/polynomial/PolyTest.h"
 #include  "helpers/HelperTest.h"
-#include "engine/vector/vectorTest.h"
-#include "engine/coordinateSystem/coordinateSystemTest.h"
-#include "engine/matrix/matrixTest.h"
+#include "core/vector/vectorTest.h"
+#include "core/coordinateSystem/coordinateSystemTest.h"
+#include "core/matrix/matrixTest.h"
 
 void RunAllTests() {
     // PolyTest();

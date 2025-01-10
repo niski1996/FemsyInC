@@ -3,14 +3,14 @@
 //
 #include "helper.h"
 #include "../models/types.h"
-#include "../engine/vector/vector.h"
-#include "../engine/coordinateSystem/coordinateSystem.h"
+#include "../core/vector/vector.h"
+#include "../core/coordinateSystem/coordinateSystem.h"
 #include <stdlib.h>
 
 
 void ForMatrixOfElementCreateCo_planarCoordinateSystem(
     const TriangleElementGeometry *triangleElementGeometries,
-    unsigned int elements_count,
+    const unsigned int elements_count,
     CoordinateSystem** outputCoordinateSystemCollection) {
     if (elements_count == 0) {
         return;
