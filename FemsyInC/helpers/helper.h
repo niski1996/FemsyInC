@@ -35,8 +35,5 @@ void transformElementGeometryToNewCoordinateSystem(
     const gsl_matrix *transformationMatrix,
     TriangleElementGeometry *result);
 
-int readPointsFromCSV(const char *path, int **pointCollection);
-int readElementsFromCSV(const char *path, unsigned int (**nodeNumberCollection)[3]);
-unsigned int read_3_columns_matrix(const char *filepath, gsl_matrix **OutputMatrix, int *OutputRowCount, const char *Format);
 
 #endif //HELPER_H

@@ -12,10 +12,15 @@ endif()
 find_package(GSL REQUIRED)
 add_executable(FemsyInC main.c
         Test.c
-        Test.h)
+        Test.h
+)
 add_subdirectory(core)
+add_subdirectory(logger)
 add_subdirectory(models)
+add_subdirectory(input)
 add_subdirectory(helpers)
+target_link_libraries(FemsyInC PRIVATE parser)
+target_link_libraries(FemsyInC PRIVATE logger)
 target_link_libraries(FemsyInC PRIVATE coordinateSystem)
 target_link_libraries(FemsyInC PRIVATE vector)
 target_link_libraries(FemsyInC PRIVATE matrix)

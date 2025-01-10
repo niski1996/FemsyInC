@@ -2,6 +2,7 @@
 #include "Test.h"
 #include "core/coordinateSystem/coordinateSystem.h"
 #include "helpers/helper.h"
+#include "input/parser.h"
 #include "models/types.h"
 
 
@@ -13,7 +14,7 @@ int RunTask() {
     gsl_matrix *RawNodeCoordinateCollection;
     int NodeCollectionCount = 0;
 
-    if (read_3_columns_matrix(pathNodes, &RawNodeCoordinateCollection, &NodeCollectionCount, NodesFormat) != 0) {
+    if (parse_3_columns_matrix(pathNodes, &RawNodeCoordinateCollection, &NodeCollectionCount, NodesFormat) != 0) {
         fprintf(stderr, "Error reading the matrix from the file\n");
         return -1;
     }
