@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.30)
 project(FemsyInC C)
 
-set(CMAKE_C_STANDARD 23)
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
 set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG")
@@ -14,6 +15,8 @@ add_executable(FemsyInC main.c
         Test.c
         Test.h
 )
+
+#add_subdirectory(Google_tests)
 add_subdirectory(core)
 add_subdirectory(logger)
 add_subdirectory(models)

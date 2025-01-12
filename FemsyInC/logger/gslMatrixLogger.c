@@ -8,11 +8,12 @@
 
 void logMatrix(const gsl_matrix *matrix) {
     logDatetime();
-    FILE *file = fopen(LogName, "wa");
+    FILE *file = fopen(LogName, "a");
     for (size_t i = 0; i < matrix->size1; ++i) {
         for (size_t j = 0; j < matrix->size2; ++j) {
             fprintf(file,"%f ", gsl_matrix_get(matrix, i, j));
         }
-        printf("\n");
+        fprintf(file, "\n");
     }
+    fclose(file);
 }

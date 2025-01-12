@@ -3,21 +3,44 @@
 #include "core/coordinateSystem/coordinateSystem.h"
 #include "helpers/helper.h"
 #include "input/parser.h"
+#include "logger/logger.h"
 #include "models/types.h"
 
 
 int RunTask() {
+    //read nodes from csv
     const char* pathNodes = "/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/input/example/nodes.csv";
-    printf("start task from location: %s\n", pathNodes);
-    printf("reading nodes from nodes.csv\n");
-    const char *NodesFormat = "%lf,%lf,%lf";
+    logMessage("start RunTask");
+    logMessage("path for Nodes: %s", pathNodes);
+    const char *NodesFormat = "%f,%f,%f";
     gsl_matrix *RawNodeCoordinateCollection;
     int NodeCollectionCount = 0;
 
     if (parse_3_columns_matrix(pathNodes, &RawNodeCoordinateCollection, &NodeCollectionCount, NodesFormat) != 0) {
         fprintf(stderr, "Error reading the matrix from the file\n");
+        logMessage("An error occurred while reading the nodes matrix from the file");
         return -1;
     }
+    logMessage("finished reading nodes. Nodes count: %d node matrix: ", NodeCollectionCount);
+    logMatrix(RawNodeCoordinateCollection);
+
+    //read elements from csv
+    const char *pathElements = "/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/input/example/elements.csv";
+    logMessage("path for Elements: %s", pathElements);
+    const char *ElementsFormat = "%d,%d,%d";
+    gsl_matrix *RawElementCollection;
+    int ElementCollectionCount = 0;
+    if (parse_3_columns_matrix(pathElements, &RawElementCollection, &ElementCollectionCount, "%f,%f,%f") != 0) {
+        fprintf(stderr, "Error reading the matrix from the file\n");
+        logMessage("An error occurred while reading the matrix elements from the file");
+        return -1;
+    }
+
+    logMessage("finished reading Elements. Elements count: %d node matrix: ", ElementCollectionCount);
+    logMatrix(RawElementCollection);
+
+
+    gsl_matrix_free(RawElementCollection);
     gsl_matrix_free(RawNodeCoordinateCollection);
 
      // int pointCollectionCount = readPointsFromCSV(pathNodes, &pointCollection);
