@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 
-void ForMatrixOfElementCreateCo_planarCoordinateSystem(
+void createCoordinateSystemCollectionCoPlanarToElementCollection(
     const TriangleElementGeometry *triangleElementGeometries,
     const unsigned int elements_count,
     CoordinateSystem** outputCoordinateSystemCollection) {

@@ -25,7 +25,7 @@ void ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsCorrectCoordinateS
     };
 
     CoordinateSystem* coordinateSystemCollection[2] = {NULL, NULL};
-    ForMatrixOfElementCreateCo_planarCoordinateSystem(elements, 2, coordinateSystemCollection);
+    createCoordinateSystemCollectionCoPlanarToElementCollection(elements, 2, coordinateSystemCollection);
 
     assert(coordinateSystemCollection[0] != NULL);
     assert(coordinateSystemCollection[1] != NULL);
@@ -36,7 +36,7 @@ void ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsCorrectCoordinateS
 
 void ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsNULLForFailedAllocation() {
     CoordinateSystem* coordinateSystems[1] = {NULL};
-    ForMatrixOfElementCreateCo_planarCoordinateSystem(NULL, UINT_MAX, coordinateSystems);
+    createCoordinateSystemCollectionCoPlanarToElementCollection(NULL, UINT_MAX, coordinateSystems);
     assert(coordinateSystems[0] == NULL);
 }
 

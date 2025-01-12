@@ -10,7 +10,7 @@
 #include "../models/types.h"
 
 
-void ForMatrixOfElementCreateCo_planarCoordinateSystem(
+void createCoordinateSystemCollectionCoPlanarToElementCollection(
     const TriangleElementGeometry *triangleElementGeometries,
     unsigned int elements_count,
     CoordinateSystem** outputCoordinateSystemCollection);

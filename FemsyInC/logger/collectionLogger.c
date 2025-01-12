@@ -35,3 +35,8 @@ void logElementCollection(TriangleElementGeometry *element, int elementCollectio
 
     }
 }
+void logCoordinateSystemCollection(const CoordinateSystem **coordinateSystem, int coordinateSystemCount) {
+    for (int i = 0; i < coordinateSystemCount; i++) {
+        logCoordinateSystem(coordinateSystem[i]);
+    }
+}

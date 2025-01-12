@@ -44,3 +44,7 @@ void logMessage(const char *format, ...) {
 
     fclose(file);
 }
+
+void logGlsVector(const gsl_vector *vector, FILE *file) {
+    fprintf(file, "Vector: x: %lf, y: %lf, z: %lf", gsl_vector_get(vector, 0), gsl_vector_get(vector, 1), gsl_vector_get(vector, 2));
+}

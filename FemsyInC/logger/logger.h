@@ -15,5 +15,8 @@ void logPointCollection(
     int pointCollectionCount);
 void logElement(TriangleElementGeometry element);
 void logElementCollection(TriangleElementGeometry *element, int elementCollectionCount);
+void logCoordinateSystem(const CoordinateSystem *coordinateSystem);
+void logCoordinateSystemCollection(const CoordinateSystem **coordinateSystem, int coordinateSystemCount);
+void logGlsVector(const gsl_vector *vector, FILE *file);
 
 #endif //LOGGER_H
