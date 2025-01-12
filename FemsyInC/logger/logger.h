@@ -18,5 +18,6 @@ void logElementCollection(TriangleElementGeometry *element, int elementCollectio
 void logCoordinateSystem(const CoordinateSystem *coordinateSystem);
 void logCoordinateSystemCollection(const CoordinateSystem **coordinateSystem, int coordinateSystemCount);
 void logGlsVector(const gsl_vector *vector, FILE *file);
+void logMatrixCollection(const gsl_matrix **matrix, const int matrixCount);
 
 #endif //LOGGER_H

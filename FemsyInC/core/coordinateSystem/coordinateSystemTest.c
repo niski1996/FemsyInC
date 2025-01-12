@@ -122,7 +122,7 @@ void ForCollectionOfCoordinateSystemsCreateTransformationMatrices_CreatesCorrect
     gsl_matrix *transformationMatrix2 = gsl_matrix_alloc(3, 3);
     gsl_matrix *OutputTransformationMatrices[] = {transformationMatrix1, transformationMatrix2};
 
-    forCollectionOfCoordinateSystemsCreateTransformationMatrices(coordinateSystems, count, OutputTransformationMatrices);
+    createTransformationMatrixCollectionFromGlobalToLocalCoordinateSystem(coordinateSystems, count, OutputTransformationMatrices);
 
     // Validate the first transformation matrix
     assert(fabs(gsl_matrix_get(transformationMatrix1, 0, 0) - 1.0) < 1e-6);

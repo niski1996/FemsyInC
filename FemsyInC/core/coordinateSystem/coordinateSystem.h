@@ -18,8 +18,8 @@ void freeCoordinateSystem(
 void createTransformationMatrix(
     const CoordinateSystem* newCoordinateSystemInnOldLayout,
     gsl_matrix* OutputOldToNewTransformationMatrix);
-void forCollectionOfCoordinateSystemsCreateTransformationMatrices(
-    const CoordinateSystem** coordinateSystems,
-    unsigned int count,
-    gsl_matrix** OutputTransformationMatrices);
+void createTransformationMatrixCollectionFromGlobalToLocalCoordinateSystem(
+    const CoordinateSystem** LocalCoordinateSystemCollection,
+    unsigned int elementsCount,
+    gsl_matrix** OutputGlobalToLocalTransformationMatrices);
 #endif //COORDINATESYSTEM_H

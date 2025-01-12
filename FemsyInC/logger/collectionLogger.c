@@ -8,15 +8,13 @@
 
 
 
-void logMatrix(const gsl_matrix *matrix) {
-    logDatetime();
-    FILE *file = fopen(LogName, "a");
-    for (size_t i = 0; i < matrix->size1; ++i) {
-        for (size_t j = 0; j < matrix->size2; ++j) {
-            fprintf(file,"%f ", gsl_matrix_get(matrix, i, j));
-        }
-        fprintf(file, "\n");
+void logMatrixCollection(const gsl_matrix **matrix, const int matrixCount) {
+    for (int i = 0; i < matrixCount; i++) {
+        logMatrix(matrix[i]);
     }
+    FILE *file = fopen(LogName, "a");
+    fprintf(file, "\n");
+
     fclose(file);
 }
 

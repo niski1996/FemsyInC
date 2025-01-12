@@ -6,6 +6,18 @@
 
 char *LogName = "log.log";
 
+void logMatrix(const gsl_matrix *matrix) {
+    FILE *file = fopen(LogName, "a");
+    for (size_t i = 0; i < matrix->size1; ++i) {
+        for (size_t j = 0; j < matrix->size2; ++j) {
+            fprintf(file,"%f ", gsl_matrix_get(matrix, i, j));
+        }
+        fprintf(file, "\n");
+    }
+    fprintf(file, "\n");
+    fclose(file);
+}
+
 void logDatetime() {
     FILE *file = fopen(LogName, "a");
     if (file == NULL) {

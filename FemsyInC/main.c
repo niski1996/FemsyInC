@@ -74,26 +74,44 @@ int RunTask() {
 
 
 
+    logMessage("Create a transformation matrix");
+    gsl_matrix **GlobalToLocalTransformationMatrixCollection = calloc(ElementCollectionCount, sizeof(gsl_matrix *));
+    for (size_t i = 0; i < ElementCollectionCount; i++) {
+        GlobalToLocalTransformationMatrixCollection[i] = gsl_matrix_alloc(3, 3);
+        if (GlobalToLocalTransformationMatrixCollection[i] == NULL) {
+            perror("Błąd alokacji pamięci dla macierzy");
+
+            for (size_t j = 0; j < i; j++) {
+                gsl_matrix_free(GlobalToLocalTransformationMatrixCollection[j]);
+            }
+            free(GlobalToLocalTransformationMatrixCollection);
+            return EXIT_FAILURE;
+        }
+    }
+    createTransformationMatrixCollectionFromGlobalToLocalCoordinateSystem(
+    LocalCoordinateSystemsCollection,
+    ElementCollectionCount,
+    GlobalToLocalTransformationMatrixCollection);
+    logMessage("transformation matrices created:");
+    logMatrixCollection(GlobalToLocalTransformationMatrixCollection, ElementCollectionCount);
+
+
+
+
+
+
 
     for (int i =0; i<ElementCollectionCount; i++) {
         freeCoordinateSystem(&LocalCoordinateSystemsCollection[i]);
+        gsl_matrix_free(GlobalToLocalTransformationMatrixCollection[i]);
     }
+    free(GlobalToLocalTransformationMatrixCollection);
     free(LocalCoordinateSystemsCollection);
     free(ElementInGlobalCoordinatesCollection);
     free(NodesCollection);
     gsl_matrix_free(RawElementCollection);
     gsl_matrix_free(RawNodeCoordinateCollection);
 
-//
-// #ifdef NDEBUG
-//     printf("hello release\n");
-// #endif
-//     free(nodeNumberCollection);
-//     free(pointCollection);
-//     for (int i = 0; i < elementCollectionCount; i++) {
-//         free(localCoordinateSystemsCollection[i]);
-//     }
-    // free(localCoordinateSystemsCollection);
     return 0;
 }
 

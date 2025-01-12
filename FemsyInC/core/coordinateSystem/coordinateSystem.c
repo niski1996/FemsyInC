@@ -73,12 +73,12 @@ void createTransformationMatrix(const CoordinateSystem *newCoordinateSystemInnOl
     gsl_matrix_set_col(OutputOldToNewTransformationMatrix, 2, newCoordinateSystemInnOldLayout->UnitVectorZ);
 }
 
-void forCollectionOfCoordinateSystemsCreateTransformationMatrices(
-    const CoordinateSystem** coordinateSystems,
-    unsigned int count,
-    gsl_matrix** OutputTransformationMatrices) {
+void createTransformationMatrixCollectionFromGlobalToLocalCoordinateSystem(
+    const CoordinateSystem** LocalCoordinateSystemCollection,
+    unsigned int elementsCount,
+    gsl_matrix** OutputGlobalToLocalTransformationMatrices) {
 
-    for (unsigned int i = 0; i < count; ++i) {
-        createTransformationMatrix(coordinateSystems[i], OutputTransformationMatrices[i]);
+    for (unsigned int i = 0; i < elementsCount; ++i) {
+        createTransformationMatrix(LocalCoordinateSystemCollection[i], OutputGlobalToLocalTransformationMatrices[i]);
     }
 }
