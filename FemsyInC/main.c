@@ -1,22 +1,24 @@
 #include <stdio.h>
+
 #include "Test.h"
 #include "core/coordinateSystem/coordinateSystem.h"
 #include "helpers/helper.h"
 #include "input/parser.h"
 #include "logger/logger.h"
 #include "models/types.h"
+#include "core/converter/converter.h"
 
 
 int RunTask() {
+    //begin of input reading
     //read nodes from csv
     const char* pathNodes = "/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/input/example/nodes.csv";
     logMessage("start RunTask");
     logMessage("path for Nodes: %s", pathNodes);
-    const char *NodesFormat = "%f,%f,%f";
     gsl_matrix *RawNodeCoordinateCollection;
     int NodeCollectionCount = 0;
 
-    if (parse_3_columns_matrix(pathNodes, &RawNodeCoordinateCollection, &NodeCollectionCount, NodesFormat) != 0) {
+    if (parse_3_columns_matrix(pathNodes, &RawNodeCoordinateCollection, &NodeCollectionCount) != 0) {
         fprintf(stderr, "Error reading the matrix from the file\n");
         logMessage("An error occurred while reading the nodes matrix from the file");
         return -1;
@@ -27,10 +29,9 @@ int RunTask() {
     //read elements from csv
     const char *pathElements = "/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/input/example/elements.csv";
     logMessage("path for Elements: %s", pathElements);
-    const char *ElementsFormat = "%d,%d,%d";
     gsl_matrix *RawElementCollection;
     int ElementCollectionCount = 0;
-    if (parse_3_columns_matrix(pathElements, &RawElementCollection, &ElementCollectionCount, "%f,%f,%f") != 0) {
+    if (parse_3_columns_matrix(pathElements, &RawElementCollection, &ElementCollectionCount) != 0) {
         fprintf(stderr, "Error reading the matrix from the file\n");
         logMessage("An error occurred while reading the matrix elements from the file");
         return -1;
@@ -38,8 +39,26 @@ int RunTask() {
 
     logMessage("finished reading Elements. Elements count: %d node matrix: ", ElementCollectionCount);
     logMatrix(RawElementCollection);
+    //end of input reading
 
 
+    Point *NodesCollection = malloc(NodeCollectionCount * sizeof(Point));
+    logMessage("converting the matrix to the point collection");
+    if (convertRawCoordinatesMatrixToPointCollection(RawNodeCoordinateCollection, NodeCollectionCount, NodesCollection) != 0) {
+        fprintf(stderr, "Error converting the matrix to the point collection\n");
+        logMessage("An error occurred while converting the matrix to the point collection");
+        return -1;
+    }
+    logMessage("finished converting the matrix to the point collection. Nodes count: %d  Points array: ", NodeCollectionCount);
+    logPointCollection(NodesCollection, NodeCollectionCount);
+
+    logMessage("instering nodes coordinates instead of elements numbers");
+    TriangleElementGeometry *ElementsCollection = malloc(ElementCollectionCount * sizeof(TriangleElementGeometry));
+    convertMatrixOfElementNumberIntoCollectionOfElements(NodesCollection, RawElementCollection, ElementCollectionCount, ElementsCollection);
+    logElementCollection(ElementsCollection, ElementCollectionCount);
+
+    free(ElementsCollection);
+    free(NodesCollection);
     gsl_matrix_free(RawElementCollection);
     gsl_matrix_free(RawNodeCoordinateCollection);
 

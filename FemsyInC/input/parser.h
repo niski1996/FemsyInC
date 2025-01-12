@@ -10,6 +10,5 @@
 int parse_3_columns_matrix(
     const char *filepath,
     gsl_matrix **OutputMatrix,
-    int *OutputRowCount,
-    const char *Format);
+    int *OutputRowCount);
 #endif //PARSER_H

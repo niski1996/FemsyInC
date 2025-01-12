@@ -4,8 +4,9 @@
 
 #include "parser.h"
 
-int parse_3_columns_matrix(const char *filepath, gsl_matrix **OutputMatrix, int *OutputRowCount, const char *Format) {
+int parse_3_columns_matrix(const char *filepath, gsl_matrix **OutputMatrix, int *OutputRowCount) {
     FILE *file;
+    const char *Format = "%f,%f,%f";
     const size_t column_count = 3;
     union {
         int i;

@@ -14,61 +14,9 @@
 #include "../core/vector/vector.h"
 #include "../core/coordinateSystem/coordinateSystem.h"
 
-void ForMatrixOfElementInsertNodesCoordinates_ReturnsCorrectCoordinates() {
-    Point nodes[] = {
-        {0.0, 0.0, 0.0},
-        {1.0, 0.0, 0.0},
-        {0.0, 1.0, 0.0},
-        {1.0, 1.0, 0.0}
-    };
 
-    unsigned int elements[] = {
-        0, 1, 2,
-        1, 3, 2
-    };
 
-    int nodesCount = 4;
-    TriangleElementGeometry *coords = ForMatrixOfElementInsertNodesCoordinates(elements, 2, nodes, &nodesCount);
 
-    assert(coords != NULL);
-    assert(coords[0].nodes[0].x == 0.0 && coords[0].nodes[0].y == 0.0 && coords[0].nodes[0].z == 0.0);
-    assert(coords[0].nodes[1].x == 1.0 && coords[0].nodes[1].y == 0.0 && coords[0].nodes[1].z == 0.0);
-    assert(coords[0].nodes[2].x == 0.0 && coords[0].nodes[2].y == 1.0 && coords[0].nodes[2].z == 0.0);
-
-    assert(coords[1].nodes[0].x == 1.0 && coords[1].nodes[0].y == 0.0 && coords[1].nodes[0].z == 0.0);
-    assert(coords[1].nodes[1].x == 1.0 && coords[1].nodes[1].y == 1.0 && coords[1].nodes[1].z == 0.0);
-    assert(coords[1].nodes[2].x == 0.0 && coords[1].nodes[2].y == 1.0 && coords[1].nodes[2].z == 0.0);
-
-    free(coords);
-}
-
-void ForMatrixOfElementInsertNodesCoordinates_HandlesEmptyElements() {
-    Point nodes[] = {
-        {0.0, 0.0, 0.0},
-        {1.0, 0.0, 0.0},
-        {0.0, 1.0, 0.0},
-        {1.0, 1.0, 0.0}
-    };
-
-    unsigned int elements[] = {};
-
-    int nodesCount = 4;
-    TriangleElementGeometry *coords = ForMatrixOfElementInsertNodesCoordinates(elements, 0, nodes, &nodesCount);
-
-    assert(coords == NULL);
-}
-
-void ForMatrixOfElementInsertNodesCoordinates_HandlesNullNodes() {
-    unsigned int elements[] = {
-        0, 1, 2,
-        1, 3, 2
-    };
-
-    int nodesCount = 0;
-    TriangleElementGeometry *coords = ForMatrixOfElementInsertNodesCoordinates(elements, 2, NULL, &nodesCount);
-
-    assert(coords == NULL);
-}
 
 void ForMatrixOfElementCreateCo_planarCoordinateSystem_ReturnsCorrectCoordinateSystems() {
     TriangleElementGeometry elements[2] = {
@@ -176,20 +124,7 @@ void TransformElementGeometryToNewCoordinateSystem_HandlesZeroMatrix() {
     gsl_matrix_free(transformationMatrix);
 }
 
-void readElementsFromCSV_ReturnsCorrectNumberOfElements() {
-    int **nodeNumberCollection = NULL;
-    int count = readElementsFromCSV("/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/input/example/elements.csv", &nodeNumberCollection);
 
-    assert(count == 1862);
-    assert(nodeNumberCollection != NULL);
-    assert(nodeNumberCollection[0][0] == 49 && nodeNumberCollection[0][1] == 99 && nodeNumberCollection[0][2] == 98);
-    assert(nodeNumberCollection[1][0] == 49 && nodeNumberCollection[1][1] == 98 && nodeNumberCollection[1][2] == 48);
-
-    for (int i = 0; i < count; i++) {
-        free(nodeNumberCollection[i]);
-    }
-    free(nodeNumberCollection);
-}
 
 
 
@@ -197,7 +132,6 @@ void readElementsFromCSV_ReturnsCorrectNumberOfElements() {
 void HelperTest() {
     // readPointsFromCSV_ReturnsCorrectNumberOfPoints();
     // TransformPointToNewCoordinateSystem_ReturnsCorrectCoordinates();
-    readElementsFromCSV_ReturnsCorrectNumberOfElements();
     // TransformPointToNewCoordinateSystem_HandlesZeroMatrix();
     // TransformElementGeometryToNewCoordinateSystem_ReturnsCorrectCoordinates();
     // TransformElementGeometryToNewCoordinateSystem_HandlesZeroMatrix();

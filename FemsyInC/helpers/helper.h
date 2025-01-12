@@ -10,11 +10,6 @@
 #include "../models/types.h"
 
 
-TriangleElementGeometry* ForMatrixOfElementInsertNodesCoordinates(
-    unsigned int (**elements)[3],
-    unsigned int elements_count, Point *nodes,
-    int *nodesCount);
-
 void ForMatrixOfElementCreateCo_planarCoordinateSystem(
     const TriangleElementGeometry *triangleElementGeometries,
     unsigned int elements_count,

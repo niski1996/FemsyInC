@@ -1,4 +1,4 @@
-add_library(helper STATIC InputHelper.c
+add_library(helper STATIC
         helper.h
         HelperTest.h
         HelperTest.c
