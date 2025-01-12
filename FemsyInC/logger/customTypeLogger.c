@@ -6,9 +6,9 @@
 #include "logger.h"
 #include "../models/types.h"
 
-void logElement(const TriangleElementGeometry element) {
+void logElement(const TriangleElementGeometry element, const int ElementNumber) {
     FILE *file = fopen(LogName, "a");
-    fprintf(file, "Element nodes: ");
+    fprintf(file, "Element %d nodes : ", ElementNumber);
     for (int i = 0; i < 3; i++) {
         fprintf(file,"Node %d:     x: %lf, y: %lf, z: %lf", i, element.nodes[i].x, element.nodes[i].y, element.nodes[i].z);
     }

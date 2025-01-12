@@ -61,3 +61,14 @@ void transformElementGeometryToNewCoordinateSystem(
     TransformPointToNewCoordinateSystem(&triangleElementGeometry->nodes[1], transformationMatrix, &result->nodes[1]);
     TransformPointToNewCoordinateSystem(&triangleElementGeometry->nodes[2], transformationMatrix, &result->nodes[2]);
 }
+
+void transformElementGeometryCollectionToNewCoordinateSystem(
+    const TriangleElementGeometry *triangleElementGeometry,
+    const gsl_matrix **transformationMatrix,
+    TriangleElementGeometry *result,
+    const int ElementCount) {
+    for (int i = 0; i < ElementCount; i++) {
+        transformElementGeometryToNewCoordinateSystem(&triangleElementGeometry[i], transformationMatrix[i], &result[i]);
+    }
+
+}

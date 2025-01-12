@@ -29,7 +29,7 @@ void logPointCollection(const Point *pointCollection, const int pointCollectionC
 
 void logElementCollection(TriangleElementGeometry *element, int elementCollectionCount) {
     for (int i = 0; i < elementCollectionCount; i++) {
-        logElement(element[i]);
+        logElement(element[i], i);
 
     }
 }

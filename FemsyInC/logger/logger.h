@@ -13,7 +13,7 @@ void logMessage(const char *format, ...) ;
 void logPointCollection(
     const Point *pointCollection,
     int pointCollectionCount);
-void logElement(TriangleElementGeometry element);
+void logElement(TriangleElementGeometry element, int ElementNumber);
 void logElementCollection(TriangleElementGeometry *element, int elementCollectionCount);
 void logCoordinateSystem(const CoordinateSystem *coordinateSystem);
 void logCoordinateSystemCollection(const CoordinateSystem **coordinateSystem, int coordinateSystemCount);

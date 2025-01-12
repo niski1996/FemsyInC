@@ -31,4 +31,10 @@ void transformElementGeometryToNewCoordinateSystem(
     TriangleElementGeometry *result);
 
 
+void transformElementGeometryCollectionToNewCoordinateSystem(
+    const TriangleElementGeometry *triangleElementGeometry,
+    const gsl_matrix **transformationMatrix,
+    TriangleElementGeometry *result,
+    int ElementCount);
+
 #endif //HELPER_H

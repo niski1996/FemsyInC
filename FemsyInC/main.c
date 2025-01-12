@@ -97,6 +97,18 @@ int RunTask() {
 
 
 
+    logMessage("Transforming the element geometry to the new coordinate system");
+    TriangleElementGeometry *ElementInLocalCoordinatesCollection = malloc(ElementCollectionCount * sizeof(TriangleElementGeometry));
+    transformElementGeometryCollectionToNewCoordinateSystem(
+        ElementInGlobalCoordinatesCollection,
+        GlobalToLocalTransformationMatrixCollection,
+        ElementInLocalCoordinatesCollection,
+        ElementCollectionCount);
+    logMessage("Elements in local co-planar coordinates:");
+    logElementCollection(ElementInLocalCoordinatesCollection, ElementCollectionCount);
+
+
+
 
 
 
@@ -107,6 +119,7 @@ int RunTask() {
     }
     free(GlobalToLocalTransformationMatrixCollection);
     free(LocalCoordinateSystemsCollection);
+    free(ElementInLocalCoordinatesCollection);
     free(ElementInGlobalCoordinatesCollection);
     free(NodesCollection);
     gsl_matrix_free(RawElementCollection);
