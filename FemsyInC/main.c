@@ -131,8 +131,8 @@ int RunTask() {
 int main() {
     int i, j, k;
     float x, y, z;
-    // RunAllTests();
-    RunTask();
+    RunAllTests();
+    // RunTask();
 
     return 0;
 }

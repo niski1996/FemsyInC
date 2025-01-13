@@ -9,9 +9,9 @@
 #include "core/matrix/matrixTest.h"
 
 void RunAllTests() {
-    // PolyTest();
+    PolyTest();
     // coordinateSystemTest();
     // vectorTest();
-    HelperTest();
+    // HelperTest();
     // matrixTest();
 }

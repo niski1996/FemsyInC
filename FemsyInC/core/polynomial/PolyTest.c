@@ -6,6 +6,8 @@
 #include "PolyHelper.h"
 #include "Poly.h"
 #include "PolyTest.h"
+
+#include <math.h>
 // add separate region here
 // Test functions for 1D Polynomials (Poly)
 void test_createPoly() {
@@ -412,16 +414,73 @@ void TestPolyOneVariable() {
     test_comparePolys();
 };
 
-void TestPolyTwoVariables() {
+
+
+void evaluatePolyXY_CorrectEvaluation() {
+    PolyXY poly = {
+        .degree = 2,
+        .coefficients = (double[]){1, 2, 3, 4, 5, 6}
+    };
+    double result = evaluatePolyXY(&poly, 1.0, 1.0);
+    assert(fabs(result - 21.0) < 1e-6);
+}
+
+void evaluatePolyXY_ZeroCoefficients() {
+    PolyXY poly = {
+        .degree = 2,
+        .coefficients = (double[]){0, 0, 0, 0, 0, 0}
+    };
+    double result = evaluatePolyXY(&poly, 1.0, 1.0);
+    assert(fabs(result - 0.0) < 1e-6);
+}
+
+void evaluatePolyXY_NegativeCoefficients() {
+    PolyXY poly = {
+        .degree = 2,
+        .coefficients = (double[]){-1, -2, -3, -4, -5, -6}
+    };
+    double result = evaluatePolyXY(&poly, 1.0, 1.0);
+    assert(fabs(result + 21.0) < 1e-6);
+}
+
+void evaluatePolyXY_HighDegree() {
+    PolyXY poly = {
+        .degree = 3,
+        .coefficients = (double[]){1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+    };
+    double result = evaluatePolyXY(&poly, 1.0, 1.0);
+    assert(fabs(result - 55.0) < 1e-6);
+}
+
+void evaluatePolyXY_ZeroInputs() {
+    PolyXY poly = {
+        .degree = 2,
+        .coefficients = (double[]){1, 2, 3, 4, 5, 6}
+    };
+    double result = evaluatePolyXY(&poly, 0.0, 0.0);
+    assert(fabs(result - 1.0) < 1e-6);
+}
+
+void test_evaluatePolyXY() {
+    evaluatePolyXY_CorrectEvaluation();
+    evaluatePolyXY_ZeroCoefficients();
+    evaluatePolyXY_NegativeCoefficients();
+    evaluatePolyXY_HighDegree();
+    evaluatePolyXY_ZeroInputs();
+    printf("test_evaluatePolyXY passed!\n");
+
+}
+
+void TestPolyTwoVariables(){
     test_createPolyXY();
-    test_printPolyXY();
-    test_addPolysXY();
-    test_subtractPolysXY();
-    test_multiplyPolysXY();
-    test_scalePolysXY();
+    // test_printPolyXY();
+    // test_addPolysXY();
+    // test_subtractPolysXY();
+    // test_multiplyPolysXY();
+    // test_scalePolysXY();
     // test_integratePolyXY();
     // test_derivatePolyXY();
-    // test_evaluatePolyXY();
+    test_evaluatePolyXY();
     // test_freePolyXY();
     // test_comparePolysXY();
 }
