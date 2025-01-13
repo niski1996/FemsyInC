@@ -30,7 +30,7 @@ void logCoordinateSystem(const CoordinateSystem *coordinateSystem) {
 
 void logPolyXY(const PolyXY* poly, FILE *file) {
     if (poly->coefficients == NULL || poly->degree == 0) {
-        fprintf(file, "0\n");
+        fprintf(file, "0");
         return;
     }
 
@@ -67,5 +67,4 @@ void logPolyXY(const PolyXY* poly, FILE *file) {
             ++index;
         }
     }
-    fprintf(file, "\n");
 }

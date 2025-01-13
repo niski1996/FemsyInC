@@ -21,7 +21,7 @@ void logCoordinateSystemCollection(const CoordinateSystem **coordinateSystem, in
 void logGlsVector(const gsl_vector *vector, FILE *file);
 void logMatrixCollection(const gsl_matrix **matrix, int matrixCount);
 void logPolyXY(const PolyXY* poly, FILE *file);
-void logTriangleElementShapeFunction(const PolyXY **ShapeFunctionCollection, int ElementNumber);
-void logTriangleElementCollectionShapeFunction(const PolyXY ***ShapeFunctionCollection, int ElementCount);
+void logTriangleElementShapeFunction(const PolyXY *ShapeFunctionCollection, int ElementNumber);
+void logTriangleElementCollectionShapeFunction(const PolyXY **ShapeFunctionCollection, int ElementCount);
 
 #endif //LOGGER_H

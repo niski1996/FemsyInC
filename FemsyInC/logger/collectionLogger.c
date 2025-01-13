@@ -39,19 +39,25 @@ void logCoordinateSystemCollection(const CoordinateSystem **coordinateSystem, in
     }
 }
 
-void logTriangleElementShapeFunction(const PolyXY **ShapeFunctionCollection, const int ElementNumber) {
+void logTriangleElementShapeFunction(const PolyXY *ShapeFunctionCollection, const int ElementNumber) {
     FILE *file = fopen(LogName, "a");
     fprintf(file, "Shape functions for element %-5d:    ", ElementNumber);
     for (int i = 0; i < 3; i++) {
-        logPolyXY(ShapeFunctionCollection[i], file);
+        logPolyXY(&ShapeFunctionCollection[i], file);
+
+        int current_pos = ftell(file) % 50; // Pozycja karetki w linii
+
+        // set pointer 100 further line for clarity
+        for (int i = current_pos; i < 50; i++) {
+            fputc(' ', file);
+        }
     }
-    fprintf(file,"\n");
+    fprintf(file, "\n");
     fclose(file);
 }
 
-void logTriangleElementCollectionShapeFunction(const PolyXY ***ShapeFunctionCollection, int ElementCount) {
+void logTriangleElementCollectionShapeFunction(const PolyXY **ShapeFunctionCollection, int ElementCount) {
     for (int i = 0; i < ElementCount; i++) {
         logTriangleElementShapeFunction(ShapeFunctionCollection[i], i);
-
     }
 }

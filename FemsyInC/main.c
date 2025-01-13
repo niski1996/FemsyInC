@@ -119,6 +119,7 @@ int RunTask() {
         ElementInLocalCoordinatesCollection,
         ElementCollectionCount,
         ShapeFunctionCollection);
+    logTriangleElementCollectionShapeFunction(ShapeFunctionCollection, ElementCollectionCount);
 
 
 
