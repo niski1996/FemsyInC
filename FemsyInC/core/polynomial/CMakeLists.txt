@@ -14,6 +14,7 @@ add_library(poly STATIC
         PolyTest.h
         PolyEvaluate.c
         PolyDerivate.c
-        PolyIntegrate.c)
+        PolyIntegrate.c
+        PolyFit.c)
 
 target_link_libraries(poly m)

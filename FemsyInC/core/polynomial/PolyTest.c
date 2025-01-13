@@ -471,6 +471,59 @@ void test_evaluatePolyXY() {
 
 }
 
+void PolyXYFit_CorrectCoefficients() {
+    TriangleElementGeometry elements[] = {
+        {
+            .nodes = {
+                {3, -1},
+                {1, 0},
+                {12, 1}
+            }
+        },
+        {
+            .nodes = {
+                {0, 0},
+                {2, 0},
+                {0, 2}
+            }
+        },
+        {
+            .nodes = {
+                {4, 1},
+                {2, 1},
+                {1, 2}
+            }
+        }
+    };
+
+    float functionValues[][3] = {
+        {1, 2, 3},
+        {4, 8, 12},
+        {-5, 10, -15}
+    };
+
+    for (int i = 0; i < 3; i++) {
+        const PolyXY poly = createPolyXYWithZeros(2);
+
+        PolyXYFit(&elements[i], functionValues[i], poly);
+
+        for (int j = 0; j < 3; j++) {
+            assert((fabs(evaluatePolyXY(&poly, elements[i].nodes[j].x, elements[i].nodes[j].y) - functionValues[i][j]) < 1e-6));
+        }
+
+        free(poly.coefficients);
+    }
+}
+
+void test_polyFit() {
+    PolyXYFit_CorrectCoefficients();
+    // PolyXYFit_DifferentCoefficients();
+    // PolyXYFit_ZeroCoefficients();
+    // PolyXYFit_NegativeCoefficients();
+
+    printf("All PolyTit tests passed.\n");
+}
+
 void TestPolyTwoVariables(){
     test_createPolyXY();
     // test_printPolyXY();
@@ -481,6 +534,7 @@ void TestPolyTwoVariables(){
     // test_integratePolyXY();
     // test_derivatePolyXY();
     test_evaluatePolyXY();
+    test_polyFit();
     // test_freePolyXY();
     // test_comparePolysXY();
 }
