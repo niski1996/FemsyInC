@@ -34,7 +34,7 @@ void calculateShapeFunctionForTriangleElementNodes(TriangleElementGeometry *elem
 }
 
 void calculateShapeFunctionForTriangleElementNodesCollection(
-    TriangleElementGeometry **element, int elemntCount, PolyXY **OutputShapeFunctionCollection) {
+    TriangleElementGeometry *element, int elemntCount, PolyXY **OutputShapeFunctionCollection) {
 
     if (element == NULL || OutputShapeFunctionCollection == NULL) {
         fprintf(stderr, "Invalid input to calculateShapeFunctionForTriangleElementNodesCollection\n");
@@ -42,6 +42,6 @@ void calculateShapeFunctionForTriangleElementNodesCollection(
     }
 
     for (int i = 0; i < elemntCount; i++) {
-        calculateShapeFunctionForTriangleElementNodes(element[i], OutputShapeFunctionCollection[i]);
+        calculateShapeFunctionForTriangleElementNodes(&element[i], OutputShapeFunctionCollection[i]);
     }
 }

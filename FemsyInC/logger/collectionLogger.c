@@ -38,3 +38,20 @@ void logCoordinateSystemCollection(const CoordinateSystem **coordinateSystem, in
         logCoordinateSystem(coordinateSystem[i]);
     }
 }
+
+void logTriangleElementShapeFunction(const PolyXY **ShapeFunctionCollection, const int ElementNumber) {
+    FILE *file = fopen(LogName, "a");
+    fprintf(file, "Shape functions for element %-5d:    ", ElementNumber);
+    for (int i = 0; i < 3; i++) {
+        logPolyXY(ShapeFunctionCollection[i], file);
+    }
+    fprintf(file,"\n");
+    fclose(file);
+}
+
+void logTriangleElementCollectionShapeFunction(const PolyXY ***ShapeFunctionCollection, int ElementCount) {
+    for (int i = 0; i < ElementCount; i++) {
+        logTriangleElementShapeFunction(ShapeFunctionCollection[i], i);
+
+    }
+}

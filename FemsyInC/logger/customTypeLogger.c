@@ -27,3 +27,45 @@ void logCoordinateSystem(const CoordinateSystem *coordinateSystem) {
     fclose(file);
 
 }
+
+void logPolyXY(const PolyXY* poly, FILE *file) {
+    if (poly->coefficients == NULL || poly->degree == 0) {
+        fprintf(file, "0\n");
+        return;
+    }
+
+    unsigned int index = 0;
+    for (int totalDegree = 0; totalDegree <= poly->degree; ++totalDegree) {
+        for (int i = totalDegree; i >= 0; --i) {
+            int j = totalDegree - i;
+
+            if (poly->coefficients[index] != 0) {
+                if (index != 0 && poly->coefficients[index] > 0) {
+                    fprintf(file, " + ");
+                } else if (poly->coefficients[index] < 0) {
+                    fprintf(file, " - ");
+                }
+
+                double absCoeff = (poly->coefficients[index] < 0) ? -poly->coefficients[index] : poly->coefficients[index];
+                if (absCoeff != 1 || (i == 0 && j == 0)) {
+                    fprintf(file, "%.2lf", absCoeff);
+                }
+
+                if (i > 0) {
+                    fprintf(file, "x");
+                    if (i > 1) {
+                        fprintf(file, "^%d", i);
+                    }
+                }
+                if (j > 0) {
+                    fprintf(file, "y");
+                    if (j > 1) {
+                        fprintf(file, "^%d", j);
+                    }
+                }
+            }
+            ++index;
+        }
+    }
+    fprintf(file, "\n");
+}

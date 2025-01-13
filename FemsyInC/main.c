@@ -7,6 +7,7 @@
 #include "logger/logger.h"
 #include "models/types.h"
 #include "core/converter/converter.h"
+#include "core/element/element.h"
 
 
 int RunTask() {
@@ -109,14 +110,26 @@ int RunTask() {
 
 
 
-
+    logMessage("creating shape functions for elements");
+    PolyXY **ShapeFunctionCollection = malloc(ElementCollectionCount * sizeof(PolyXY *));
+    for (int i = 0; i < ElementCollectionCount; i++) {
+        ShapeFunctionCollection[i] = malloc(3 * sizeof(PolyXY));
+    }
+    calculateShapeFunctionForTriangleElementNodesCollection(
+        ElementInLocalCoordinatesCollection,
+        ElementCollectionCount,
+        ShapeFunctionCollection);
 
 
 
     for (int i =0; i<ElementCollectionCount; i++) {
         freeCoordinateSystem(&LocalCoordinateSystemsCollection[i]);
         gsl_matrix_free(GlobalToLocalTransformationMatrixCollection[i]);
+        for (int j = 0; j < 3; j++) {
+            freePolyXY(&ShapeFunctionCollection[i][j]);
+        }
     }
+    free(ShapeFunctionCollection);
     free(GlobalToLocalTransformationMatrixCollection);
     free(LocalCoordinateSystemsCollection);
     free(ElementInLocalCoordinatesCollection);
@@ -131,8 +144,8 @@ int RunTask() {
 int main() {
     int i, j, k;
     float x, y, z;
-    RunAllTests();
-    // RunTask();  //fffsdsd
+    // RunAllTests();
+    RunTask();
 
     return 0;
 }

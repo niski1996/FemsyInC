@@ -12,6 +12,6 @@ void calculateShapeFunctionForTriangleElementNodes(
     TriangleElementGeometry *element, PolyXY *shapeFunction);
 
 void calculateShapeFunctionForTriangleElementNodesCollection(
-    TriangleElementGeometry **element, int elemntCount, PolyXY **OutputShapeFunctionCollection);
+    TriangleElementGeometry *element, int elemntCount, PolyXY **OutputShapeFunctionCollection);
 
 #endif //ELEMENT_H

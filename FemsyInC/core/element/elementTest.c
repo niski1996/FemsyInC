@@ -9,10 +9,6 @@
 #include "element.h"
 #include "../polynomial/Poly.h"
 
-// Function prototypes
-void calculateShapeFunctionForTriangleElementNodes(TriangleElementGeometry *element, PolyXY *OutputShapeFunctionCollection);
-void calculateShapeFunctionForTriangleElementNodesCollection(TriangleElementGeometry **element, int elemntCount, PolyXY **OutputShapeFunctionCollection);
-
 void test_calculateShapeFunctionForTriangleElementNodesCollection() {
     // Create test elements
     TriangleElementGeometry element1 = {
@@ -31,7 +27,7 @@ void test_calculateShapeFunctionForTriangleElementNodesCollection() {
         }
     };
 
-    TriangleElementGeometry *elements[] = {&element1, &element2, NULL};
+    TriangleElementGeometry *elements[] = {&element1, &element2};
 
     // Allocate memory for output shape functions
     PolyXY *outputShapeFunctions[2];
@@ -63,5 +59,5 @@ void test_calculateShapeFunctionForTriangleElementNodesCollection() {
 
 void elementTest() {
     test_calculateShapeFunctionForTriangleElementNodesCollection();
-    printf("All telement tests passed!\n");
+    printf("All element tests passed!\n");
 }
