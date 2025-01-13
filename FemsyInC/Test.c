@@ -3,6 +3,7 @@
 //
 #include <stdio.h>
 #include "core/polynomial/PolyTest.h"
+#include "core/element/elementTest.h"
 #include  "helpers/HelperTest.h"
 #include "core/vector/vectorTest.h"
 #include "core/coordinateSystem/coordinateSystemTest.h"
@@ -10,6 +11,7 @@
 
 void RunAllTests() {
     PolyTest();
+    elementTest();
     // coordinateSystemTest();
     // vectorTest();
     // HelperTest();

@@ -1,3 +1,0 @@
-/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/PolyTest.dir
-/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/edit_cache.dir
-/home/kali/Desktop/cybersec/sem1/programowanie/Femsy/FemsyInC/engine/polynomial/build/CMakeFiles/rebuild_cache.dir
