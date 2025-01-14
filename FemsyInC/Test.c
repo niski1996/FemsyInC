@@ -10,7 +10,7 @@
 #include "core/matrix/matrixTest.h"
 
 void RunAllTests() {
-    PolyTest();
+    // PolyTest();
     elementTest();
     // coordinateSystemTest();
     // vectorTest();

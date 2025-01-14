@@ -6,8 +6,8 @@
 #include "../../models/types.h"
 #include "Poly.h"
 
-void PolyXYFit(TriangleElementGeometry *ElementInLocalCoordinates, float *functionValuesInPoint, PolyXY OutputPolynomialXY) {
-    if (ElementInLocalCoordinates == NULL || functionValuesInPoint == NULL || OutputPolynomialXY.coefficients == NULL) {
+void PolyXYFit(TriangleElementGeometry *ElementInLocalCoordinates, float *functionValuesInPoint, PolyXY *OutputPolynomialXY) {
+    if (ElementInLocalCoordinates == NULL || functionValuesInPoint == NULL || OutputPolynomialXY->coefficients == NULL) {
         fprintf(stderr, "Invalid input to PolyXYFit\n");
         return;
     }
@@ -41,7 +41,7 @@ void PolyXYFit(TriangleElementGeometry *ElementInLocalCoordinates, float *functi
 
     // Copy the result to the output polynomial coefficients
     for (int i = 0; i < 3; i++) {
-        OutputPolynomialXY.coefficients[i] = gsl_vector_get(x, i);
+        OutputPolynomialXY->coefficients[i] = gsl_vector_get(x, i);
     }
 
     gsl_matrix_free(A);

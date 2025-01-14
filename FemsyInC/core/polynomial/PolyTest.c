@@ -505,7 +505,7 @@ void PolyXYFit_CorrectCoefficients() {
     for (int i = 0; i < 3; i++) {
         const PolyXY poly = createPolyXYWithZeros(2);
 
-        PolyXYFit(&elements[i], functionValues[i], poly);
+        PolyXYFit(&elements[i], functionValues[i], &poly);
 
         for (int j = 0; j < 3; j++) {
             assert((fabs(evaluatePolyXY(&poly, elements[i].nodes[j].x, elements[i].nodes[j].y) - functionValues[i][j]) < 1e-6));

@@ -29,7 +29,7 @@ void calculateShapeFunctionForTriangleElementNodes(TriangleElementGeometry *elem
 
     // Fit the shape functions using PolyXYFit
     for (int i = 0; i < 3; i++) {
-        PolyXYFit(element, functionValues[i], OutputShapeFunctionCollection[i]);
+        PolyXYFit(element, functionValues[i], &OutputShapeFunctionCollection[i]);
     }
 }
 

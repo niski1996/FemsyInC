@@ -9,6 +9,15 @@
 #include "element.h"
 #include "../polynomial/Poly.h"
 
+#include <stdio.h>
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "../polynomial/PolyHelper.h"
+#include "../polynomial/Poly.h"
+#include "../polynomial/PolyTest.h"
+
 void test_calculateShapeFunctionForTriangleElementNodesCollection() {
     // Create test elements
     TriangleElementGeometry element1 = {

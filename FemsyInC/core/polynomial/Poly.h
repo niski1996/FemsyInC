@@ -45,7 +45,7 @@ double evaluatePolyXY(const PolyXY* poly, double x, double y);
 void PolyXYFit(
     TriangleElementGeometry *ElementInLocalCoordinates,
     float *functionValuesInPoint,
-    PolyXY OutputPolynomialXY);
+    PolyXY *OutputPolynomialXY);
 
 void freePolyXY(PolyXY *poly);
 int comparePolysXY(PolyXY poly1, PolyXY poly2);
