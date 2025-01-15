@@ -113,7 +113,10 @@ int RunTask() {
     logMessage("creating shape functions for elements");
     PolyXY **ShapeFunctionCollection = malloc(ElementCollectionCount * sizeof(PolyXY *));
     for (int i = 0; i < ElementCollectionCount; i++) {
-        ShapeFunctionCollection[i] = malloc(3 * sizeof(PolyXY));
+        ShapeFunctionCollection[i] = (PolyXY *)malloc(3 * sizeof(PolyXY));
+        for (int j = 0; j < 3; j++) {
+            ShapeFunctionCollection[i][j] = createPolyXYWithZeros(1); // Degree 1 for linear shape functions
+        }
     }
     calculateShapeFunctionForTriangleElementNodesCollection(
         ElementInLocalCoordinatesCollection,
@@ -123,12 +126,14 @@ int RunTask() {
 
 
 
+
     for (int i =0; i<ElementCollectionCount; i++) {
         freeCoordinateSystem(&LocalCoordinateSystemsCollection[i]);
         gsl_matrix_free(GlobalToLocalTransformationMatrixCollection[i]);
         for (int j = 0; j < 3; j++) {
             freePolyXY(&ShapeFunctionCollection[i][j]);
         }
+        free(ShapeFunctionCollection[i]);
     }
     free(ShapeFunctionCollection);
     free(GlobalToLocalTransformationMatrixCollection);
@@ -143,10 +148,9 @@ int RunTask() {
 }
 
 int main() {
-    int i, j, k;
-    float x, y, z;
-    RunAllTests();
-    // RunTask();
+
+    // RunAllTests();
+    RunTask();
 
     return 0;
 }
