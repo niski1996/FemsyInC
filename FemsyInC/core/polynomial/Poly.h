@@ -1,6 +1,8 @@
 #ifndef POLY_H
 #define POLY_H
 
+#include <stdbool.h>
+
 #include "../../models/types.h"
 
 typedef struct Poly
@@ -25,7 +27,7 @@ Poly subtractPolys(Poly poly1, Poly poly2);
 Poly multiplyPolys(Poly poly1, Poly poly2);
 Poly scalePoly(Poly poly, int scale);
 Poly integratePoly(Poly poly);
-Poly derivatePoly(Poly poly);
+Poly derivativePoly(Poly poly);
 double evaluatePoly(const Poly* poly, double x);
 void freePoly(Poly *poly);
 int comparePolys(Poly poly1, Poly poly2);
@@ -40,12 +42,12 @@ PolyXY subtractPolysXY(PolyXY poly1, PolyXY poly2);
 PolyXY multiplyPolysXY(PolyXY poly1, PolyXY poly2);
 PolyXY scalePolysXY(PolyXY poly1, int scale);
 PolyXY integratePolyXY(PolyXY poly);
-PolyXY derivatePolyXY(PolyXY poly);
+void derivativePolyXY(PolyXY Poly, bool DxDerivative, PolyXY *OutputDerivative);
 double evaluatePolyXY(const PolyXY* poly, double x, double y);
 void PolyXYFit(
-    TriangleElementGeometry *ElementInLocalCoordinates,
-    float *functionValuesInPoint,
-    PolyXY *OutputPolynomialXY);
+    const TriangleElementGeometry *ElementInLocalCoordinates,
+    const float *functionValuesInPoint,
+    const PolyXY *OutputPolynomialXY);
 
 void freePolyXY(PolyXY *poly);
 int comparePolysXY(PolyXY poly1, PolyXY poly2);

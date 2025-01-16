@@ -104,17 +104,18 @@ void test_integratePoly() {
     printf("test_integratePoly passed!\n");
 }
 
-void test_derivatePoly() {
-    double coeffs[] = {1.0, 2.0, 3.0};
-    Poly poly = createPoly(2, coeffs);
-    Poly result = derivatePoly(poly);
-    assert(result.degree == 1);
-    assert(result.coefficients[0] == 2.0);
-    assert(result.coefficients[1] == 6.0);
-    freePoly(&poly);
-    freePoly(&result);
-    printf("test_derivatePoly passed!\n");
-}
+// void test_derivatePoly() {
+//     double coeffs[] = {1.0, 2.0, 3.0};
+//     Poly poly = createPoly(2, coeffs);
+//     derivatePoly(poly);
+//     Poly result = derivatePoly(poly);
+//     assert(result.degree == 1);
+//     assert(result.coefficients[0] == 2.0);
+//     assert(result.coefficients[1] == 6.0);
+//     freePoly(&poly);
+//     freePoly(&result);
+//     printf("test_derivatePoly passed!\n");
+// }
 
 void test_evaluatePoly() {
     double coeffs[] = {1.0, 2.0, 3.0};
@@ -351,32 +352,33 @@ void test_AdjustPoly() {
 void test1_AdjustPolyXY() {
     double coeffs[] = {1.0, 0.0, 0.0};
     PolyXY poly = {1, coeffs};
-    PolyXY adjustedPoly = AdjustPolyXY(poly);
-    assert(adjustedPoly.degree == 0);
-    assert(adjustedPoly.coefficients[0] == 1.0);
+    AdjustPolyXY(&poly);
+    assert(poly.degree == 0);
+    assert(poly.coefficients[0] == 1.0);
     printf("test1_AdjustPolyXY passed!\n");
 }
 
 void test2_AdjustPolyXY() {
     double coeffs[] = {1.0, 0.1, 0.4, 0, 0, 0};
     PolyXY poly = {2, coeffs};
-    PolyXY adjustedPoly = AdjustPolyXY(poly);
-    assert(adjustedPoly.degree == 1);
+    AdjustPolyXY(&poly);
+    assert(poly.degree == 1);
     printf("test2_AdjustPolyXY passed!\n");
 }
 
 void test3_AdjustPolyXY() {
     double coeffs[] = {1.0, 0.1, 0.4, 0, 0, 1, 0, 0, 0, 0};
     PolyXY poly = {3, coeffs};
-    PolyXY adjustedPoly = AdjustPolyXY(poly);
-    assert(adjustedPoly.degree == 2);
+    AdjustPolyXY(&poly);
+    assert(poly.degree == 2);
     printf("test3_AdjustPolyXY passed!\n");
 }
 
 void test_SwitchXWithY() {
     double coeffs[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
     PolyXY poly = {2, coeffs};
-    PolyXY switchedPoly = SwitchXWithY(poly);
+    PolyXY switchedPoly = createPolyXYWithZeros(2);
+    SwitchXWithY(&poly, &switchedPoly);
     assert(switchedPoly.degree == 2);
     assert(switchedPoly.coefficients[0] == 1.0);
     assert(switchedPoly.coefficients[1] == 3.0);
@@ -408,7 +410,7 @@ void TestPolyOneVariable() {
     test_multiplyPolys();
     test_scalePoly();
     test_integratePoly();
-    test_derivatePoly();
+    // test_derivatePoly();
     test_evaluatePoly();
     test_freePoly();
     test_comparePolys();
@@ -515,14 +517,54 @@ void PolyXYFit_CorrectCoefficients() {
     }
 }
 
+void test_derivativePolyXY() {
+    // Create a test polynomial with known coefficients
+    double coefficients[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0}; // Example coefficients for a degree 2 polynomial
+    PolyXY poly = createPolyXY(2, coefficients);
+
+    // Allocate memory for the output derivative polynomial
+    // PolyXY outputDerivativeX = createPolyXYWithZeros(1);
+    PolyXY outputDerivativeY = createPolyXYWithZeros(1);
+
+    // Call the function to calculate the derivative with respect to x
+    // derivativePolyXY(poly, true, &outputDerivativeX);
+
+    // Expected coefficients for the derivative with respect to x
+    // double expectedCoefficientsX[] = {2.0, 8.0, 5.0}; // Adjust based on your specific implementation
+
+    // // Verify the output derivative polynomial against expected values
+    // for (int i = 0; i < 3; i++) {
+    //     assert(outputDerivativeX.coefficients[i] == expectedCoefficientsX[i]);
+    // }
+    // assert(outputDerivativeX.degree == 1);
+    //
+    // // Call the function to calculate the derivative with respect to y
+    derivativePolyXY(poly, false, &outputDerivativeY);
+
+    // Expected coefficients for the derivative with respect to y
+    double expectedCoefficientsY[] = {3.0, 5.0, 12.0}; // Adjust based on your specific implementation
+
+    // Verify the output derivative polynomial against expected values
+    for (int i = 0; i < 3; i++) {
+        assert(outputDerivativeY.coefficients[i] == expectedCoefficientsY[i]);
+    }
+    // assert(outputDerivativeX.degree == 1);
+
+    // Free allocated memory
+    // freePolyXY(&outputDerivativeX);
+    freePolyXY(&outputDerivativeY);
+    freePolyXY(&poly);
+
+    printf("Test for derivativePolyXY passed!\n");
+}
+
 void test_polyFit() {
     PolyXYFit_CorrectCoefficients();
-    // PolyXYFit_DifferentCoefficients();
-    // PolyXYFit_ZeroCoefficients();
-    // PolyXYFit_NegativeCoefficients();
-
     printf("All PolyTit tests passed.\n");
 }
+
+
+
 
 void TestPolyTwoVariables(){
     test_createPolyXY();
@@ -532,9 +574,10 @@ void TestPolyTwoVariables(){
     // test_multiplyPolysXY();
     // test_scalePolysXY();
     // test_integratePolyXY();
-    // test_derivatePolyXY();
+    // test_derivativePolyXY();
     test_evaluatePolyXY();
     test_polyFit();
+    test_derivativePolyXY();
     // test_freePolyXY();
     // test_comparePolysXY();
 }

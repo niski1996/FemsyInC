@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "PolyHelper.h"
+
 Poly derivatePoly(Poly poly) {
     if (poly.degree == 0) {
         if (poly.degree == 0) {
@@ -25,4 +27,28 @@ Poly derivatePoly(Poly poly) {
 
     Poly result = {new_degree, new_coefficients};
     return result;
+}
+
+
+void derivativePolyXYdx(const PolyXY *Poly, PolyXY *OutputDerivative) {
+
+}
+void derivativePolyXYdy(const PolyXY *Poly, PolyXY *OutputDerivative) {
+    for (int i =1; i<=Poly->degree; i++) {
+        const unsigned int  start = getPascalTriangleNLevelStartIndex(i+1);
+        const unsigned int end = getPascalTriangleNLevelEndIndex(i+1);
+        const unsigned int LoweLevelStart = getPascalTriangleNLevelStartIndex(i);
+        for (unsigned int j = start+1; j<=end; j++) {
+            OutputDerivative->coefficients[LoweLevelStart+(j-start-1)] = (j-start)*Poly->coefficients[j];
+        }
+    }
+    AdjustPolyXY(OutputDerivative);
+}
+
+void derivativePolyXY(const PolyXY Poly,const bool DxDerivative, PolyXY *OutputDerivative) {
+    if (DxDerivative) {
+        derivativePolyXYdx(&Poly, OutputDerivative);
+    } else {
+        derivativePolyXYdy(&Poly, OutputDerivative);
+    }
 }

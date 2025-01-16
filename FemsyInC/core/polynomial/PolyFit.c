@@ -6,7 +6,7 @@
 #include "../../models/types.h"
 #include "Poly.h"
 
-void PolyXYFit(TriangleElementGeometry *ElementInLocalCoordinates, float *functionValuesInPoint, PolyXY *OutputPolynomialXY) {
+void PolyXYFit(const TriangleElementGeometry *ElementInLocalCoordinates, const float *functionValuesInPoint, const PolyXY *OutputPolynomialXY) {
     if (ElementInLocalCoordinates == NULL || functionValuesInPoint == NULL || OutputPolynomialXY->coefficients == NULL) {
         fprintf(stderr, "Invalid input to PolyXYFit\n");
         return;

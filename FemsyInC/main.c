@@ -149,8 +149,8 @@ int RunTask() {
 
 int main() {
 
-    // RunAllTests();
-    RunTask();
+    RunAllTests();
+    // RunTask();
 
     return 0;
 }
