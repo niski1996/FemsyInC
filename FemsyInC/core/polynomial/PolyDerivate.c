@@ -30,9 +30,7 @@ Poly derivatePoly(Poly poly) {
 }
 
 
-void derivativePolyXYdx(const PolyXY *Poly, PolyXY *OutputDerivative) {
 
-}
 void derivativePolyXYdy(const PolyXY *Poly, PolyXY *OutputDerivative) {
     for (int i =1; i<=Poly->degree; i++) {
         const unsigned int  start = getPascalTriangleNLevelStartIndex(i+1);
@@ -45,10 +43,20 @@ void derivativePolyXYdy(const PolyXY *Poly, PolyXY *OutputDerivative) {
     AdjustPolyXY(OutputDerivative);
 }
 
-void derivativePolyXY(const PolyXY Poly,const bool DxDerivative, PolyXY *OutputDerivative) {
+void derivativePolyXYdx(const PolyXY *Poly, PolyXY *OutputDerivative) {
+    PolyXY tmpPoly =createPolyXYWithZeros(Poly->degree);
+    PolyXY tmpDerivPoly =createPolyXYWithZeros(OutputDerivative->degree);
+    SwitchXWithY(Poly, &tmpPoly);
+    derivativePolyXYdy(&tmpPoly,&tmpDerivPoly);
+    SwitchXWithY(&tmpDerivPoly,OutputDerivative);
+    freePolyXY(&tmpPoly);
+    freePolyXY(&tmpDerivPoly);
+}
+
+void derivativePolyXY(const PolyXY *Poly, bool DxDerivative, PolyXY *OutputDerivative) {
     if (DxDerivative) {
-        derivativePolyXYdx(&Poly, OutputDerivative);
+        derivativePolyXYdx(Poly, OutputDerivative);
     } else {
-        derivativePolyXYdy(&Poly, OutputDerivative);
+        derivativePolyXYdy(Poly, OutputDerivative);
     }
 }

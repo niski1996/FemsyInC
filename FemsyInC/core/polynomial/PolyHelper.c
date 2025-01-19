@@ -49,18 +49,12 @@ void AdjustPolyXY(PolyXY *poly) {
     }
 }
 
-PolyXY SwitchXWithY(PolyXY *poly, PolyXY *OutputPoly) {
-    // Copy the input polynomial to the output polynomial
-    *OutputPoly = *poly;
-
+void SwitchXWithY(const PolyXY *poly, PolyXY *OutputPoly) {
     for (unsigned int i = 0; i <= poly->degree; ++i) {
         unsigned int startIndex = getPascalTriangleNLevelStartIndex(i + 1);
         unsigned int endIndex = getPascalTriangleNLevelEndIndex(i + 1);
-        for (unsigned int j = 0; j < getPascalTriangleLevelNumerosity(i + 1) / 2; ++j) {
-            double buffer = OutputPoly->coefficients[startIndex + j];
-            OutputPoly->coefficients[startIndex + j] = OutputPoly->coefficients[endIndex - j];
-            OutputPoly->coefficients[endIndex - j] = buffer;
+        for (unsigned int j = 0; j < getPascalTriangleLevelNumerosity(i + 1); ++j) {
+            OutputPoly->coefficients[startIndex + j] = poly->coefficients[endIndex - j];
         }
     }
-    return *OutputPoly;
 }

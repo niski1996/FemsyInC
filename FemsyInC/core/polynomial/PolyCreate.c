@@ -17,7 +17,7 @@ Poly createPoly(int degree, double *coefficients) {
     return poly;
 }
 
-PolyXY createPolyXY(const int degree, const double *coefficients) {
+PolyXY createPolyXY(const unsigned int degree, const double *coefficients) {
     const PolyXY poly = createPolyXYWithZeros(degree);
     const unsigned int elementCount = getPascalTriangleElementCount(degree + 1);
     for (int i = 0; i < elementCount; i++) {
@@ -27,7 +27,7 @@ PolyXY createPolyXY(const int degree, const double *coefficients) {
 }
 
 // create XY polynomial with coefficient fitting to degree with values 0.0. tbh handle only allocation an degree
-PolyXY createPolyXYWithZeros(const int degree) {
+PolyXY createPolyXYWithZeros(const unsigned int degree) {
     PolyXY poly;
     poly.degree = degree;
     const unsigned int elementCount = getPascalTriangleElementCount(degree + 1);

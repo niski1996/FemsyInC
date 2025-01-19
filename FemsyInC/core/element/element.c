@@ -35,3 +35,30 @@ void calculateShapeFunctionForTriangleElementNodesCollection(
         calculateShapeFunctionForTriangleElementNodes(&element[i], OutputShapeFunctionCollection[i]);
     }
 }
+
+void calculateShapeFunctionDerivativesForTriangleElementNodes(
+    PolyXY *ShapeFunctionsForTriangleElement,
+    PolyXY *OutputShapeFunctionsForTriangleElement) {
+    for (int i = 0; i<3; i++) {
+
+    }
+
+}
+
+//It applies only to triangular elements, where the shape function is of the first degree,
+//so its derivative reduces to a constant.
+void calculateNodeDerivativeCollection(PolyXY *poly, PolyXY ***OutputDerivativeCollection) {
+    PolyXY dx = createPolyXYWithZeros(poly->degree-1);
+    PolyXY dy = createPolyXYWithZeros(poly->degree-1);
+    // derivativePolyXY()
+}
+
+
+
+void calculateShapeFunctionDerivativesForTriangleElementNodesCollection(
+    PolyXY **ShapeFunctionCollection,
+    int elementsCount,
+    PolyXY **OutputShapeFunctionDerivativeCollection) {
+
+}
+

@@ -122,19 +122,34 @@ int RunTask() {
         ElementInLocalCoordinatesCollection,
         ElementCollectionCount,
         ShapeFunctionCollection);
-    logTriangleElementCollectionShapeFunction(ShapeFunctionCollection, ElementCollectionCount);
+    logTriangleElementCollectionPolyXY(ShapeFunctionCollection, ElementCollectionCount);
+
+
+    logMessage("creating derivatives for elements");
+    PolyXY **ShapeFunctionDerivativeCollection = malloc(ElementCollectionCount * sizeof(PolyXY *));
+    for (int i = 0; i < ElementCollectionCount; i++) {
+        ShapeFunctionDerivativeCollection[i] = (PolyXY *)malloc(3 * sizeof(PolyXY));
+        for (int j = 0; j < 3; j++) {
+            ShapeFunctionDerivativeCollection[i][j] = createPolyXYWithZeros(1); // Degree 1 for linear shape functions
+        }
+    }
+
+    // logTriangleElementCollectionPolyXY(ShapeFunctionDerivativeCollection, ElementCollectionCount);
 
 
 
 
-    for (int i =0; i<ElementCollectionCount; i++) {
+    for (int i = 0; i < ElementCollectionCount; i++) {
         freeCoordinateSystem(&LocalCoordinateSystemsCollection[i]);
         gsl_matrix_free(GlobalToLocalTransformationMatrixCollection[i]);
         for (int j = 0; j < 3; j++) {
             freePolyXY(&ShapeFunctionCollection[i][j]);
+            freePolyXY(&ShapeFunctionDerivativeCollection[i][j]);
         }
         free(ShapeFunctionCollection[i]);
+        free(ShapeFunctionDerivativeCollection[i]);
     }
+    free(ShapeFunctionDerivativeCollection);
     free(ShapeFunctionCollection);
     free(GlobalToLocalTransformationMatrixCollection);
     free(LocalCoordinateSystemsCollection);

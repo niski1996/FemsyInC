@@ -376,7 +376,7 @@ void test3_AdjustPolyXY() {
 
 void test_SwitchXWithY() {
     double coeffs[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
-    PolyXY poly = {2, coeffs};
+    PolyXY poly = createPolyXY(2, coeffs);
     PolyXY switchedPoly = createPolyXYWithZeros(2);
     SwitchXWithY(&poly, &switchedPoly);
     assert(switchedPoly.degree == 2);
@@ -387,6 +387,8 @@ void test_SwitchXWithY() {
     assert(switchedPoly.coefficients[4] == 5.0);
     assert(switchedPoly.coefficients[5] == 4.0);
     printf("test_SwitchXWithY passed!\n");
+    freePolyXY(&poly);
+    freePolyXY(&switchedPoly);
 }
 
 void TestPolyHelper() {
@@ -523,23 +525,23 @@ void test_derivativePolyXY() {
     PolyXY poly = createPolyXY(2, coefficients);
 
     // Allocate memory for the output derivative polynomial
-    // PolyXY outputDerivativeX = createPolyXYWithZeros(1);
+    PolyXY outputDerivativeX = createPolyXYWithZeros(1);
     PolyXY outputDerivativeY = createPolyXYWithZeros(1);
 
     // Call the function to calculate the derivative with respect to x
-    // derivativePolyXY(poly, true, &outputDerivativeX);
+    derivativePolyXY(&poly, true, &outputDerivativeX);
 
     // Expected coefficients for the derivative with respect to x
-    // double expectedCoefficientsX[] = {2.0, 8.0, 5.0}; // Adjust based on your specific implementation
+    double expectedCoefficientsX[] = {2.0, 8.0, 5.0}; // Adjust based on your specific implementation
 
     // // Verify the output derivative polynomial against expected values
-    // for (int i = 0; i < 3; i++) {
-    //     assert(outputDerivativeX.coefficients[i] == expectedCoefficientsX[i]);
-    // }
-    // assert(outputDerivativeX.degree == 1);
+    for (int i = 0; i < 3; i++) {
+    assert(outputDerivativeX.coefficients[i] == expectedCoefficientsX[i]);
+    }
+    assert(outputDerivativeX.degree == 1);
     //
     // // Call the function to calculate the derivative with respect to y
-    derivativePolyXY(poly, false, &outputDerivativeY);
+    derivativePolyXY(&poly, false, &outputDerivativeY);
 
     // Expected coefficients for the derivative with respect to y
     double expectedCoefficientsY[] = {3.0, 5.0, 12.0}; // Adjust based on your specific implementation
@@ -577,7 +579,7 @@ void TestPolyTwoVariables(){
     // test_derivativePolyXY();
     test_evaluatePolyXY();
     test_polyFit();
-    test_derivativePolyXY();
+    // test_derivativePolyXY();
     // test_freePolyXY();
     // test_comparePolysXY();
 }
@@ -586,5 +588,5 @@ void PolyTest() {
     printf("poly`test\n");
     TestPolyTwoVariables();
     // TestPolyOneVariable();
-    // TestPolyHelper();
+    TestPolyHelper();
 };

@@ -33,8 +33,8 @@ void freePoly(Poly *poly);
 int comparePolys(Poly poly1, Poly poly2);
 
 // Functions for 2D Polynomials (PolyXY)
-PolyXY createPolyXY(int degree, const double *coefficients);
-PolyXY createPolyXYWithZeros(const int degree);
+PolyXY createPolyXY(unsigned int degree, const double *coefficients);
+PolyXY createPolyXYWithZeros(unsigned int degree);
 
 void printPolyXY(PolyXY poly);
 PolyXY addPolysXY(PolyXY poly1, PolyXY poly2);
@@ -42,7 +42,7 @@ PolyXY subtractPolysXY(PolyXY poly1, PolyXY poly2);
 PolyXY multiplyPolysXY(PolyXY poly1, PolyXY poly2);
 PolyXY scalePolysXY(PolyXY poly1, int scale);
 PolyXY integratePolyXY(PolyXY poly);
-void derivativePolyXY(PolyXY Poly, bool DxDerivative, PolyXY *OutputDerivative);
+void derivativePolyXY(const PolyXY *Poly, bool DxDerivative, PolyXY *OutputDerivative);
 double evaluatePolyXY(const PolyXY* poly, double x, double y);
 void PolyXYFit(
     const TriangleElementGeometry *ElementInLocalCoordinates,

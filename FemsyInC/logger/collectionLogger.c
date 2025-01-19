@@ -56,7 +56,7 @@ void logTriangleElementShapeFunction(const PolyXY *ShapeFunctionCollection, cons
     fclose(file);
 }
 
-void logTriangleElementCollectionShapeFunction(const PolyXY **ShapeFunctionCollection, int ElementCount) {
+void logTriangleElementCollectionPolyXY(const PolyXY **ShapeFunctionCollection, int ElementCount) {
     for (int i = 0; i < ElementCount; i++) {
         logTriangleElementShapeFunction(ShapeFunctionCollection[i], i);
     }
